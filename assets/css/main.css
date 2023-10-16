@@ -1961,6 +1961,7 @@ input, select, textarea {
 
 			.image.featured img {
 				display: block;
+				/* border: solid red 1px; */
 				width: 100%;
 			}
 
