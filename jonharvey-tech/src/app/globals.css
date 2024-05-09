@@ -1,9 +1,9 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -38,6 +38,18 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  --zindex-background: 0;      /* Farthest back: Background elements */
+  --zindex-default: 1;    
+  --zindex-animation-base: 100; /* hidden elements */
+  --zindex-animation-backgrounds: 200; /* stage backdrops */
+  --zindex-animation-sequences: 300; /* main groups */
+  --zindex-animation-ship: 500; /* likely always on top */
+  --zindex-animation-overship: 600; /* if I need to cover the ship for some reason */
+  --zindex-dropdown: 1000;     /* Dropdown menus */
+  --zindex-overlay: 2000;      /* Overlays */
+  --zindex-modal: 3000;        /* Modals */
+  --zindex-tooltip: 4000;      /* Tooltips, popovers */    
 }
 
 @media (prefers-color-scheme: dark) {
