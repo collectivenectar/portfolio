@@ -1,0 +1,30 @@
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: var(--zindex-animation-sequences);
+}
+
+.wrapper > * {
+  position: absolute; 
+  transform-origin:initial; 
+}
+.launchGround, .deepSpace, .launchSky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.launchGround {
+  z-index: inherit + 1;
+}
+.deepSpace {
+  z-index: inherit;
+
+}
+.launchSky {
+  z-index:inherit;
+}

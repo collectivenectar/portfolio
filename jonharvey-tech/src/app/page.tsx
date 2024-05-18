@@ -1,12 +1,12 @@
 import styles from './page.module.css';
 
-import Hero from '../components/Hero';
+import Story from '../components/Story';
 
 export default function Home() {
   return (
     <div className={styles.home}>
-      <section className={styles.hero}>
-        <Hero />
+      <section className={styles.story}>
+        <Story />
       </section>
       {/* <section className={styles.about}>
         <h2>My Story</h2>

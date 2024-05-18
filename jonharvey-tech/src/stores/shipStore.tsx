@@ -23,7 +23,7 @@ export type ShipActions = {
   setRotation: (rotation: number) => void;
   setPosition: (position: number[]) => void;
   setSequence: (sequence: SequenceType) => void;
-  getSpriteSheet: () => void;
+  getSpriteSheet: () => string;
 };
 
 export type ShipStore = ShipState & ShipActions;
@@ -35,11 +35,11 @@ export const defaultShipState: ShipState = {
     'x-axis': { frames: 30, spriteFile: '/shipSpriteSheet3.png' },
     'y-axis': { frames: 30, spriteFile: '/shipSpriteSheet1.png' },
     'z-axis': { frames: 30, spriteFile: '/shipSpriteSheet2.png' },
-    idle: { frames: 1, spriteFile: '/shipSpriteSheet2.png' },
+    'idle': { frames: 1, spriteFile: '/shipSpriteSheet2.png' },
   },
-  scale: 0.4,
+  scale: 1,
   rotation: 0,
-  position: [40, 40],
+  position: [0, 0],
 };
 
 export const createShipStore = (initState: ShipState = defaultShipState) => {
@@ -55,7 +55,7 @@ export const createShipStore = (initState: ShipState = defaultShipState) => {
     setSequence: (newSequence) => set((state) => ({ sequence: newSequence })),
     getSpriteSheet: () => {
       const state = get();
-      return state.animationSequences[state.sequence as SequenceType];
+      return state.animationSequences[state.sequence as SequenceType].spriteFile;
     },
   }));
 };

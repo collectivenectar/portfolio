@@ -4,11 +4,10 @@
   flex-direction: column;
   justify-content: flex-start;
 }
-.hero{
-  height: 92vh;
-  border: solid transparent 1px;
-  flex-grow: 0;
-  flex-shrink: 0;
+.story{
+  height: auto;
+  border: solid red 1px;
+
 }
 .about{
   height: 92vh;

@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './Test2.module.css';
-interface RoundDivAnimationProps {
+import styles from './LeaveGalaxyScene.module.css';
+interface LeaveGalaxySceneProps {
   scrollY: number;
 }
 
-const RoundDivAnimation: React.FC<RoundDivAnimationProps> = ({ scrollY }) => {
+const LeaveGalaxyScene: React.FC<LeaveGalaxySceneProps> = ({ scrollY }) => {
   if (scrollY < 300 || scrollY > 600) return null;
 
   const effectiveScrollY = scrollY - 300;
@@ -22,4 +22,4 @@ const RoundDivAnimation: React.FC<RoundDivAnimationProps> = ({ scrollY }) => {
   );
 };
 
-export default RoundDivAnimation;
+export default LeaveGalaxyScene;
