@@ -1,47 +1,52 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { throttle } from 'lodash';
+import React, { useState, useEffect } from 'react';
 import { useShipStore } from '@/providers/ShipStoreProvider';
 import styles from './Ship.module.css';
-import Story from '../Story';
 
 export type ShipProps = {
-  scrollPosition: number;
+  scrollY: number;
   StoryRect: DOMRect | null;
 };
 
 const Ship: React.FC<ShipProps> = (props) => {
-  const { scrollPosition, StoryRect } = props;
+  const { StoryRect, scrollY } = props;
 
   const {
     position,
-    scale,
     rotation,
     frame,
     sequence,
     getSpriteSheet,
-    setScale,
   } = useShipStore((state) => state);
 
-  const frameWidth = 270; // Example: 100px wide
-  const frameHeight = 270; // Example: 100px tall
+  // Ship spritesheet frame size in pixels
+  const frameWidth = 270;
+  const frameHeight = 270;
+  
+  // Spritesheet length in frames
+  const numFrames = 30;
 
-  // Number of frames in the sprite sheet
-  const numFrames = 30; // Example: 10 frames
-  const maxHeight = StoryRect? StoryRect.width * 0.5225: 0; // 52.25% of the viewport width
-  const maxWidth = StoryRect? StoryRect.height * 1.7778: 0; // 177.78% of the viewport height
+  // Normalizing vars pulled from parent container
+  const maxHeight = StoryRect? StoryRect.width * 0.5225: 0;
+  const maxWidth = StoryRect? StoryRect.height * 1.7778: 0;
 
-  // Calculate the aspect ratio from padding-top
-  const aspectRatio = 100 / 52.25; // Derived from padding-top
+  // Fixed aspect ratio of parent container
+  const aspectRatio = 100 / 52.25;
 
-  // Determine scaling factor based on minimum applicable dimension
+  // Automatic scaling var for ship spritesheet frames, aka makes it responsive
   const scalingFactor = Math.min(maxHeight / frameHeight, maxWidth / (frameWidth * aspectRatio)) / 4;
-  // Calculating scaled dimensions
+  console.log(scalingFactor, maxHeight, maxWidth)
+  
+  // Calculations for scaling the ship frame size relative to container dimensions
   const scaledFrameWidth = frameWidth * scalingFactor;
   const scaledFrameHeight = frameHeight * scalingFactor;
   const scaledSheetWidth = frameWidth * numFrames * scalingFactor;
   const scaledSheetHeight = frameHeight * scalingFactor;
+
+  // Animation via moving spritesheet position
   const backgroundPositionX = -(frame - 1) * scaledFrameWidth;
   const backgroundPosition = `${backgroundPositionX}px 0px`;
+
+  // Var for rotating sprite frame around the containers center point
   const rotateSprite = `rotate(${rotation}deg)`;
 
   const [spriteSheet, setSpriteSheet] = useState<string>('');
@@ -49,11 +54,15 @@ const Ship: React.FC<ShipProps> = (props) => {
   useEffect(() => {
     setSpriteSheet(getSpriteSheet());
   }, [sequence]);
+  if(scrollY < 0){
+    return null
+  }
   return (
     <div
       className={styles.spriteContainer}
       style={{
-        transform: `translate(${position[0]}%, ${position[1]}%)`,
+        transform: `translate(${position[0]}px, ${position[1]}px)`,
+        transition: 'transform 0.3s ease-out',
         willChange: 'transform',
         minHeight: `100%`,
         maxHeight: `100%`

@@ -9,22 +9,49 @@
 }
 
 .wrapper > * {
-  position: absolute; 
-  transform-origin:initial; 
+  position: absolute;
+  transform-origin: initial;
 }
-.launchGround, .deepSpace, .launchSky {
+.deepSpace,
+.launchSky,
+.launchClouds,
+.launchCloudBank,
+.launchCloudBankTop,
+.launchGlobeSpace,
+.launchGround0,
+.launchGround1,
+.launchGround2,
+.launchGround3 {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-}
-.launchGround {
-  z-index: inherit + 1;
+  min-height: 100%;
 }
 .deepSpace {
-  z-index: inherit;
-
+  z-index: 2;
 }
 .launchSky {
-  z-index:inherit;
+  z-index: 1;
+}
+.launchClouds{
+  z-index: 3;
+}
+.launchCloudBank{
+  z-index: 2;
+}
+.launchGlobeSpace{
+  z-index: 2;
+}
+.launchGround0 {
+  z-index: 5;
+}
+.launchGround1 {
+  z-index: 4;
+}
+.launchGround2 {
+  z-index: 3;
+}
+.launchGround3 {
+  z-index: 2;
 }

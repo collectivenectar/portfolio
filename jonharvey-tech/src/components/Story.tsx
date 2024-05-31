@@ -80,12 +80,13 @@ const Story = () => {
         } else {
           const containerRect = heroWrapper !== null? heroWrapper.getBoundingClientRect(): null;
           if (containerRect) {
-            // if width breaks the aspect ratio, set padding to height? whose height?
-            // width doesn't actually change, but right value and left value increase.
-            console.log(containerRect.width * .5225, containerRect.left)
             setStoryContainerRect(containerRect);
             if(containerRect.left > 1){
-              setWrapperPadding((`${containerRect.width * .5225}px`))
+              if(containerRect.left > 200){
+                setWrapperPadding((`${containerRect.width * .5025}px`))
+              }else{
+                setWrapperPadding((`${containerRect.width * .5125}px`))
+              }
             }else{
               setWrapperPadding(`52.25%`)
             }
@@ -123,6 +124,11 @@ const Story = () => {
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
+    if(storyContainerRect === null){
+      if(containerRef.current){
+        setStoryContainerRect(containerRef.current?.getBoundingClientRect())
+      }
+    }
     return () => window.removeEventListener('resize', handleResize);
   }, [handleResize, storyContainerRect]);
 
@@ -142,8 +148,8 @@ const Story = () => {
         scrollY={virtualScrollY}
       /> */}
       <Ship
-        scrollPosition={virtualScrollY}
         StoryRect={storyContainerRect}
+        scrollY={virtualScrollY}
       />
     </div>
   );
