@@ -79,22 +79,22 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
   };
 
   // JS to CSS transform strings
-  const transformGround0 = animateHTMLY(58, 1);
-  const transformGround1 = animateHTMLY(-20, 0.9);
-  const transformGround2 = animateHTMLY(-15, 0.7);
-  const transformGround3 = animateHTMLY(-35, 0.5);
-  const transformSky = animateHTMLY(-92, 0.3);
-  const transformClouds = `${animateHTMLY(-53, 0.65)} ${animateHTMLX(0, -0.2)}`;
-  const transformCloudBank1 = `${animateHTMLY(-120, 0.45)} ${animateHTMLX(15, -0.3)}`;
-  const transformCloudBank2 = `${animateHTMLY(-120, 0.44)} ${animateHTMLX(0, -0.4)}`;
-  const transformCloudBank3 = `${animateHTMLY(-120, 0.43)} ${animateHTMLX(0, 0.3)}`;
-  const transformCloudBank4 = `${animateHTMLY(-120, 0.42)} ${animateHTMLX(0, -0.3)}`;
-  const transformCloudBank5 = `${animateHTMLY(-120, 0.41)} ${animateHTMLX(0, 0.3)}`;
+  const transformGround0 = animateHTMLY(67, 1);
+  const transformGround1 = animateHTMLY(-11, 0.9);
+  const transformGround2 = animateHTMLY(-1, 0.8);
+  const transformGround3 = animateHTMLY(-26, 0.7);
+  const transformSky = animateHTMLY(-80, 0.3);
+  const transformClouds = `${animateHTMLY(-44, 0.9)} ${animateHTMLX(0, -0.2)}`;
+  const transformCloudBank1 = `${animateHTMLY(-50, 0.9)} ${animateHTMLX(15, -0.3)}`;
+  const transformCloudBank2 = `${animateHTMLY(-80, 0.64)} ${animateHTMLX(0, -0.4)}`;
+  const transformCloudBank3 = `${animateHTMLY(-110, 0.43)} ${animateHTMLX(0, 0.3)}`;
+  const transformCloudBank4 = `${animateHTMLY(-110, 0.42)} ${animateHTMLX(0, -0.3)}`;
+  const transformCloudBank5 = `${animateHTMLY(-110, 0.41)} ${animateHTMLX(0, 0.3)}`;
   const transformGlobeSpace = animateHTMLY(-180, 0.5);
-  const transformSpace = animateHTMLY(-220, 0.4);
+  const transformSpace = animateHTMLY(-210, 0.4);
 
-  const opacityStartScroll = 25;
-  const opacityEndScroll = 33;
+  const opacityStartScroll = 20;
+  const opacityEndScroll = 30;
 
   const calculateOpacity = (effectiveScrollY: number) => {
     if (scrollY < opacityStartScroll) return 1; // Full opacity before starting point
@@ -141,7 +141,7 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
           alt='background sky'
           layout='responsive'
           width={500}
-          height={500}
+          height={472}
           objectFit='cover'
         />
       </div>
@@ -173,7 +173,7 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
           alt='background clouds'
           layout='responsive'
           width={500}
-          height={500}
+          height={136}
           objectFit='cover'
         />
       </div>
@@ -189,7 +189,7 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
           alt='background clouds'
           layout='responsive'
           width={500}
-          height={500}
+          height={188}
           objectFit='cover'
         />
       </div>
@@ -206,7 +206,7 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
           alt='background clouds'
           layout='responsive'
           width={500}
-          height={500}
+          height={183}
           objectFit='cover'
         />
       </div>
@@ -223,7 +223,7 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
           alt='background clouds'
           layout='responsive'
           width={500}
-          height={500}
+          height={188}
           objectFit='cover'
         />
       </div>
@@ -240,7 +240,7 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
           alt='background clouds'
           layout='responsive'
           width={500}
-          height={500}
+          height={133}
           objectFit='cover'
         />
       </div>
@@ -256,7 +256,7 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
           alt='background clouds'
           layout='responsive'
           width={500}
-          height={413}
+          height={215}
           objectFit='cover'
         />
       </div>
