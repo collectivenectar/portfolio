@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { set, throttle } from 'lodash';
 
 import LaunchScene from './storyScenes/LaunchScene';
-import LeaveGalaxyScene from './storyScenes/LeaveGalaxyScene';
 import Ship from './storyScenes/Ship';
 
 import styles from './Story.module.css';
@@ -144,9 +143,6 @@ const Story = () => {
         scrollY={virtualScrollY}
         boundingRect={storyContainerRect}
       />
-      {/* <LeaveGalaxyScene 
-        scrollY={virtualScrollY}
-      /> */}
       <Ship
         StoryRect={storyContainerRect}
         scrollY={virtualScrollY}

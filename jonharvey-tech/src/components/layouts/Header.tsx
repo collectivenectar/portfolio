@@ -7,11 +7,11 @@ const Header = () => {
       <nav className={styles.navBar}>
         <a className={styles.siteLogo}><i></i></a>
         <ul className={styles.navBarList}>
-          <li className={styles.navBarListItem}><Link href="/" className={styles.navLinks}>Home</Link></li>
-          <li className={styles.navBarListItem}><Link href="/about" className={styles.navLinks}>About</Link></li>
-          <li className={styles.navBarListItem}><Link href="/services" className={styles.navLinks}>Services</Link></li>
-          <li className={styles.navBarListItem}><Link href="/portfolio" className={styles.navLinks}>Portfolio</Link></li>
-          <li className={styles.navBarListItem}><Link href="/insights" className={styles.navLinks}>Insights</Link></li>
+          <li className={styles.navBarListItem}><Link href="/" className={styles.navLinks}>home</Link></li>
+          <li className={styles.navBarListItem}><Link href="/about" className={styles.navLinks}>about</Link></li>
+          <li className={styles.navBarListItem}><Link href="/services" className={styles.navLinks}>services</Link></li>
+          <li className={styles.navBarListItem}><Link href="/portfolio" className={styles.navLinks}>portfolio</Link></li>
+          <li className={styles.navBarListItem}><Link href="/insights" className={styles.navLinks}>insights</Link></li>
         </ul>
         <button className={styles.contactButton}>contact</button>
       </nav>

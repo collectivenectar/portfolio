@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import Header from '../components/layouts/Header';
+import Footer from '../components/layouts/Footer';
 
 import { OverlayStoreProvider } from '@/providers/OverlayStoreProvider';
 import { InputPositionStoreProvider } from '@/providers/InputPositionStoreProvider';
@@ -9,6 +10,7 @@ import { ShipStoreProvider } from '@/providers/ShipStoreProvider';
 
 import './globals.css';
 import styles from './layout.module.css';
+import './styles/fonts.css'
 
 export const metadata: Metadata = {
   title: 'Jon Harvey | IT Business Solutions and Consulting',
@@ -32,9 +34,7 @@ export default function RootLayout({
             </InputPositionStoreProvider>
           </ShipStoreProvider>
         </main>
-        <footer className={styles.footer}>
-          © 2024 Jon Harvey. All rights reserved.
-        </footer>
+        <Footer />
       </body>
     </html>
   );

@@ -43,7 +43,6 @@ const moveShip = (params: ShipParams) => {
 
     const interpolatedX = lerp(startPoint[0], endPoint[0], normalizedPosition);
     const interpolatedY = lerp(startPoint[1], endPoint[1], normalizedPosition);
-    console.log(interpolatedX, interpolatedY)
     setPositionHook([interpolatedX, interpolatedY]);
 };
 

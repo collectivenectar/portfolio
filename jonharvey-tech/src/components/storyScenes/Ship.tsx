@@ -34,7 +34,7 @@ const Ship: React.FC<ShipProps> = (props) => {
 
   // Automatic scaling var for ship spritesheet frames, aka makes it responsive
   const scalingFactor = Math.min(maxHeight / frameHeight, maxWidth / (frameWidth * aspectRatio)) / 4;
-  console.log(scalingFactor, maxHeight, maxWidth)
+
   
   // Calculations for scaling the ship frame size relative to container dimensions
   const scaledFrameWidth = frameWidth * scalingFactor;

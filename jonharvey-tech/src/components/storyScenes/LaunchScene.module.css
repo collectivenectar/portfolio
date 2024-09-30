@@ -21,6 +21,9 @@
 .launchGround0,
 .launchGround1,
 .launchGround2,
+.launchCopy1,
+.launchCopy2,
+.launchCopy3,
 .launchGround3 {
   position: absolute;
   top: 0;
@@ -30,6 +33,7 @@
   min-height: 100%;
   
 }
+
 .deepSpace {
   z-index: 2;
 }
@@ -56,4 +60,35 @@
 }
 .launchGround3 {
   z-index: 1;
+}
+.launchCopy1{
+  z-index: 3;
+  min-width: 100%;
+}
+.launchCopy1 > h2{
+  color: white;
+  font-size: 7vw;
+  font-family: 'serif';
+  text-shadow: aqua 0px 0px 2px;
+}
+.launchCopy2{
+  z-index: 3;
+  max-width: 70%;
+}
+.launchCopy2 > h2{
+  color: white;
+  font-size: 4vw;
+  font-family: "Anton", serif;
+  text-shadow: aqua 0px 0px 2px;
+}
+
+.launchCopy3{
+  z-index: 2;
+  min-width: 100%;
+}
+.launchCopy3 > h2{
+  color: white;
+  font-size: 5vw;
+  font-family: "Anton", serif;
+  text-shadow: aqua 0px 0px 2px;
 }

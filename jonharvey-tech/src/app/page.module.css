@@ -1,27 +1,41 @@
-.home{
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.story{
-  height: auto;
-  border: solid red 1px;
 
-}
-.about{
-  height: 92vh;
-  
-}
-.services{
-  height: 92vh;
-}
 .portfolio{
   height: 92vh;
 }
 .insights{
-  height: 92vh;
+  padding: 5rem 0;
+  font-family: 'Outfit', serif;
+  margin-top: 10rem;
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.insightsText{
+  width: 50%;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.insightsButton{
+  margin: 5% 2%;
+  height: 3rem;
+  width: 6rem;
+  border-radius: 35px;
 }
 .contact{
-  height: 92vh;
+  font-family: 'Outfit', serif;
+  height: 35vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5rem 10%;
+}
+.contact > button{
+  margin: 0 5rem;
+  height: 3rem;
+  width: 8rem;
+  border-radius: 35px;
 }
