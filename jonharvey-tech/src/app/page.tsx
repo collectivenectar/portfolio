@@ -6,39 +6,39 @@ import { useState } from 'react';
 import Story from '../components/Story';
 
 const about = {
-  1: 'As a full stack developer with a background in creative media, I help companies and organizations around the world connect with their audience and grow their business. I use industry standard cloud services and modern software tools to deliver your product faster and more efficiently than the competition.',
-  2: "Since 2020, I've been providing IT business solutions, applying my media expertise to offer enhanced user experiences. I specialize in crafting the user's journey, underpinned by rigorous market research, usability testing, principles of interactive design, visual composition, and art theory.",
+  1: 'I am a full-stack developer with expertise in brand strategy, user engagement, and experience design. I help teams deliver impactful digital products by leveraging modern software tools and cloud services for faster, more efficient solutions.',
+  2: "Since 2020, I've been delivering tailored IT solutions by combining technical expertise with a deep understanding of user experience and design principles. My approach integrates market research, usability testing, and interactive design to craft intuitive and scalable applications.",
 };
 
 const services = {
   1: {
     title: 'Custom Applications',
     description:
-      'Tailored solutions based on your specific needs, whether you need a CRM, a content management system, or an online shop.',
+      'Build software tailored to your needs, from CRMs and CMS platforms to e-commerce solutions. Designed for reliability, scalability, and seamless user experience.',
     image: '/images/custom-applications.png',
   },
   2: {
-    title: 'UI/UX',
+    title: 'UI/UX Design',
     description:
-      'Enhance the usability and aesthetic appeal of your existing applications, or plan out the one you want to build.',
+      'Optimize usability and aesthetics to create engaging, user-friendly interfaces. From wireframes to final design, ensure your product delivers value.',
     image: '/images/ux-research.png',
   },
   3: {
     title: 'Scalability',
     description:
-      'Make sure your application can handle significant growth without performance issues.',
+      'Develop robust systems that scale effortlessly with your business growth. Ensure performance and reliability under high traffic and demand.',
     image: '/images/scalability.png',
   },
   4: {
     title: 'Integration Services',
     description:
-      'Add tools and services with third-parties, like payment gateways, social media content, or analytics tools.',
+      'Seamlessly integrate with third-party tools such as payment gateways, analytics platforms, and APIs to expand your application’s capabilities.',
     image: '/images/system-integration.png',
   },
   5: {
-    title: 'Maintenance &  Optimization',
+    title: 'Maintenance & Optimization',
     description:
-      'Provide ongoing support to optimize application performance, update features, and ensure security compliance.',
+      'Provide ongoing support to improve performance, enhance features, and maintain compliance with the latest security standards.',
     image: '/images/maintenance.png',
   },
 };
@@ -91,15 +91,15 @@ export default function Home() {
     <div className='flex-col h-full justify-start text-white'>
       {/* HERO */}
       <section className='w-full min-h-fit p-0 text-white'>
-        <h1 className='text-8xl ml-72 mr-20 mb-2 mt-56'>launch it.</h1>
-        <p className='text-1xl ml-72'>
+        <h1 className='text-6xl text-center mt-44 lg:text-8xl lg:ml-72 lg:mr-20 lg:mb-2 lg:mt-56'>launch it.</h1>
+        <p className='w-3/5 mx-auto lg:text-1xl lg:ml-72'>
           full stack web development, brand strategy, multimedia production
         </p>
-        <div className='w-full ml-72 mt-16 mb-72 h-20 flex flex-row gap-x-12 justify-start'>
-          <button className='border-white border-2 rounded-3xl h-10 bg-black hover:bg-white hover:text-black w-40 text-lg'>
+        <div className='flex flex-row gap-2 justify-center mt-8 lg:w-full lg:ml-72 lg:mt-16 lg:mb-72 lg:h-20 lg:flex lg:flex-row lg:gap-x-12 lg:justify-start'>
+          <button className='w-fit px-4 border-white border-2 rounded-3xl h-10 bg-black hover:bg-white hover:text-black transition-bg duration-500 lg:w-40 text-lg'>
             start now
           </button>
-          <button className='border-white border-2 rounded-3xl h-10 bg-black hover:bg-white hover:text-black w-40 text-lg'>
+          <button className='border-white w-fit  px-4 border-2 rounded-3xl h-10 bg-black hover:bg-white hover:text-black lg:w-40 text-lg transition-bg duration-500'>
             learn more
           </button>
         </div>
@@ -110,42 +110,42 @@ export default function Home() {
       </section>
       {/* ABOUT */}
       <section className='min-h-fit'>
-        <div className='w-full h-fit flex flex-col justify-between items-center pt-5 text-2xl mb-64'>
-          <div className='w-11/12 flex flex-row items-center gap-20 self-baseline pl-20 pr-20 ml-16'>
-            <div className='w-8/12'>{about[1]}</div>
+        <div className='px-4 lg:w-full h-fit lg:flex lg:flex-col lg:justify-between lg:items-center lg:pt-5 lg:text-2xl lg:mb-64'>
+          <div className='flex flex-row gap-2 lg:w-11/12 lg:flex lg:flex-row lg:items-center lg:gap-20 lg:self-baseline lg:pl-20 lg:pr-20 lg:ml-16'>
+            <div className='lg:w-8/12 text-base mb-10 '>{about[1]}</div>
             <img
-              className='max-w-96 max-h-96 bg-gray-900 rounded-xl mt-36'
+              className='w-32 h-32 lg:max-w-96 lg:max-h-96 bg-gray-900 rounded-xl lg:mt-36'
               src='/images/jonharvey-nb.png'
               alt=''
             />
           </div>
-          <div className='w-11/12 flex -mt-20 flex-row items-center gap-20 self-end pr-20 pl-20 mt-20'>
+          <div className='flex flex-row gap-2 lg:w-11/12 lg:flex lg:-mt-20 lg:flex-row lg:items-center lg:gap-20 lg:self-end lg:pr-20 lg:pl-20 lg:mt-20'>
             <img
-              className='max-w-96 max-h-96 min-w-96 min-h-96 mb-40 -ml-10'
+              className='mt-28 border border-white min-w-32 min-h-32 max-h-32 max-w-32 lg:max-w-96 lg:max-h-96 lg:min-w-96 lg:min-h-96 lg:mb-40 lg:-ml-10'
               src=''
               alt=''
             />
-            <div className='w-8/12 text-right mr-20'>{about[2]}</div>
+            <div className='lg:w-8/12 lg:text-right lg:mr-20'>{about[2]}</div>
           </div>
         </div>
       </section>
       {/* SERVICES */}
       <section className='min-h-92vh'>
         <div className='h-96 flex flex-col justify-around'>
-          <h2 className='text-center text-6xl text-white'>
+          <h2 className='text-center lg:text-6xl text-white'>
             what can I do for you?
           </h2>
         </div>
         <div className='flex flex-col justify-between w-full min-h-92vh items-center'>
           <div className='w-10/12 p-20 flex flex-row justify-between self-start'>
-            <div className='w-50% flex flex-col justify-center mr-20'>
-              <span className='max-w-full text-5xl'>{services[1].title}</span>
-              <p className='text-2xl mt-10'>{services[1].description}</p>
+            <div className='lg:w-50% lg:flex lg:flex-col lg:justify-center lg:mr-20'>
+              <span className='max-w-full lg:text-5xl'>{services[1].title}</span>
+              <p className='lg:text-2xl lg:mt-10'>{services[1].description}</p>
             </div>
             <img
               src={services[1].image}
               alt='test'
-              className='block w-96 h96'
+              className='w-32 h-32 lg:block lg:w-96 lg:h96'
             />
           </div>
           <div className='w-10/12 p-20 flex justify-between flex-row-reverse self-end'>

@@ -8,11 +8,13 @@
     margin: 1rem auto;
     border-radius: 35px;
     color: white;
+    border: white 1px solid
 }
 .siteLogo{
     width: 3rem;
+    height: 3rem;
+    margin: auto 0.5rem;
     border-radius: 35px;
-    border: solid blue 1px;
 }
 .navBarList{
     height: 3rem;
@@ -36,13 +38,21 @@
     border: solid black 1px;
 }
 .contactButton{
-    width: 7%;
-    margin: 0.5rem 0.5% 0 3%;
+    width: fit-content;
+    padding: 0 1rem;
+    margin: auto 0.5rem;
     height: 3rem;
     text-align: center;
     font-size: 1.2rem;
     border-radius: 35px;
+    border: white 1px solid;
     font-family: 'Outfit', serif;
+    transition: 0.5s;
+}
+.contactButton:hover{
+    background-color: white;
+    color: black;
+    opacity: 0.9;
 }
 
 @media(max-width: 780px){
