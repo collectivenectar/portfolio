@@ -39,11 +39,11 @@
 }
 .contactButton{
     width: fit-content;
-    padding: 0 1rem;
+    padding: 12px 24px;
     margin: auto 0.5rem;
     height: 3rem;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 16px;
     border-radius: 35px;
     border: white 1px solid;
     font-family: 'Outfit', serif;

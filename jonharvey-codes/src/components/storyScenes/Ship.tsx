@@ -57,33 +57,37 @@ const Ship: React.FC<ShipProps> = (props) => {
   if(scrollY < 0){
     return null
   }
-  return (
-    <div
-      className={styles.spriteContainer}
-      style={{
-        transform: `translate(${position[0]}px, ${position[1]}px)`,
-        transition: 'transform 0.3s ease-out',
-        willChange: 'transform',
-        minHeight: `100%`,
-        maxHeight: `100%`
-      }}
-    >
-      <div className={styles.scaleContainer}>
-        <div
-          className={styles.spriteAnimation}
-          style={{
-            backgroundImage: `url(./images${spriteSheet})`,
-            backgroundSize: `${scaledSheetWidth}px ${scaledSheetHeight}px`,
-            width: `${scaledFrameWidth}px`,
-            height: `${scaledFrameHeight}px`,
-            backgroundPosition,
-            transform: rotateSprite,
-            willChange: 'background-position, transform',
-          }}
-        ></div>
+  if(scrollY >= 66){
+    return
+  }else{
+    return (
+      <div
+        className={styles.spriteContainer}
+        style={{
+          transform: `translate(${position[0]}px, ${position[1]}px)`,
+          transition: 'transform 0.3s ease-out',
+          willChange: 'transform',
+          minHeight: `100%`,
+          maxHeight: `100%`
+        }}
+      >
+        <div className={styles.scaleContainer}>
+          <div
+            className={styles.spriteAnimation}
+            style={{
+              backgroundImage: `url(./images${spriteSheet})`,
+              backgroundSize: `${scaledSheetWidth}px ${scaledSheetHeight}px`,
+              width: `${scaledFrameWidth}px`,
+              height: `${scaledFrameHeight}px`,
+              backgroundPosition,
+              transform: rotateSprite,
+              willChange: 'background-position, transform',
+            }}
+          ></div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default Ship;

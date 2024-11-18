@@ -67,8 +67,8 @@
 }
 .launchCopy1 > h2{
   color: white;
-  font-size: 7vw;
-  font-family: 'serif';
+  font-size: 8vw;
+  font-family: 'Bebas_Neue';
   text-shadow: aqua 0px 0px 2px;
 }
 .launchCopy2{
@@ -77,8 +77,8 @@
 }
 .launchCopy2 > h2{
   color: white;
-  font-size: 4vw;
-  font-family: "Anton", serif;
+  font-size: 6vw;
+  font-family: "Bebas_Neue", serif;
   text-shadow: aqua 0px 0px 2px;
 }
 
@@ -88,7 +88,7 @@
 }
 .launchCopy3 > h2{
   color: white;
-  font-size: 5vw;
-  font-family: "Anton", serif;
+  font-size: 6vw;
+  font-family: "Bebas_Neue", serif;
   text-shadow: aqua 0px 0px 2px;
 }

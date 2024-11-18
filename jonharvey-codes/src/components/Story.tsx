@@ -6,8 +6,15 @@ import LaunchScene from './storyScenes/LaunchScene';
 import Ship from './storyScenes/Ship';
 
 import styles from './Story.module.css';
+import { kill } from 'process';
+
 const Story = () => {
-  const [virtualScrollY, setVirtualScrollY] = useState<number>(0);
+
+  const [killSwitch, setKillSwitch] = useState<boolean>(false)
+
+  const [displayCTA, setDisplayCTA] = useState<boolean>(true)
+
+  const [virtualScrollY, setVirtualScrollY] = useState<number>(1);
   const [storyContainerRect, setStoryContainerRect] = useState<DOMRect | null>(
     null
   );
@@ -18,18 +25,22 @@ const Story = () => {
 
   // Wrap the logic in a function that can be throttled
   const updateScrollY = (deltaY: number) => {
+   if(!killSwitch){
     setVirtualScrollY((prev) => prev + deltaY);
+   }
   };
 
   const throttledUpdateScrollY = throttle(updateScrollY, 100);
 
   const handleWheel = (event: WheelEvent) => {
+    if (killSwitch) return;
     event.preventDefault(); // Always prevent default immediately
-    const deltaY = Math.sign(event.deltaY);
-    throttledUpdateScrollY(deltaY);
+      const deltaY = Math.sign(event.deltaY);
+      throttledUpdateScrollY(deltaY);
   };
 
   const handleTouchMove = (event: TouchEvent) => {
+    if (killSwitch) return;
     event.preventDefault(); // Always prevent default immediately
     if (event.touches.length === 1) {
       const touchY = event.touches[0].clientY;
@@ -40,13 +51,15 @@ const Story = () => {
   };
 
   const handleTouchStart = (event: TouchEvent) => {
+    if (killSwitch) return;
     if (event.touches.length === 1) {
       lastTouchY.current = event.touches[0].clientY;
     }
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    let deltaY = 0;
+    if (killSwitch) return;
+      let deltaY = 0;
     switch (event.key) {
       case 'ArrowUp':
         deltaY = -1;
@@ -68,6 +81,7 @@ const Story = () => {
         return;
     }
     setVirtualScrollY((prev) => prev + deltaY);
+    
   };
 
   const handleResize = useCallback(
@@ -97,9 +111,22 @@ const Story = () => {
     [containerRef]
   );
 
+  const handleKillSwitch = () => {
+    setKillSwitch((currentState) => !currentState)
+  }
+
+  useEffect(() => {
+    if(killSwitch){
+      containerRef.current?.removeEventListener('wheel', handleWheel);
+        containerRef.current?.removeEventListener('touchstart', handleTouchStart);
+        containerRef.current?.removeEventListener('touchmove', handleTouchMove);
+        window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [killSwitch, containerRef.current])
+
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) {
+    if (!container || killSwitch) {
       return;
     }
     container.addEventListener('wheel', handleWheel, { passive: false });
@@ -119,7 +146,7 @@ const Story = () => {
       }
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [killSwitch]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
@@ -130,7 +157,7 @@ const Story = () => {
     }
     return () => window.removeEventListener('resize', handleResize);
   }, [handleResize, storyContainerRect]);
-
+  console.log(virtualScrollY)
   return (
     <div
       ref={containerRef}
@@ -139,14 +166,17 @@ const Story = () => {
         paddingTop: `${wrapperPadding}`,
       }}
     >
-      <LaunchScene
-        scrollY={virtualScrollY}
+      <div className={styles.killSwitch} onClick={() => handleKillSwitch()}>
+      {killSwitch ? 'Touch to start' : 'Scroll to move'}
+      </div>
+      {!killSwitch && <LaunchScene
+        scrollY={!killSwitch ? virtualScrollY : 0}
         boundingRect={storyContainerRect}
-      />
-      <Ship
+      />}
+      {!killSwitch && <Ship
         StoryRect={storyContainerRect}
-        scrollY={virtualScrollY}
-      />
+        scrollY={!killSwitch ? virtualScrollY : 0}
+      />}
     </div>
   );
 };

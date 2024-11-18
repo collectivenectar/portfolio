@@ -30,7 +30,7 @@ export type ShipStore = ShipState & ShipActions;
 
 export const defaultShipState: ShipState = {
   frame: 0,
-  sequence: 'idle',
+  sequence: 'x-axis',
   animationSequences: {
     'x-axis': { frames: 30, spriteFile: '/shipSpriteSheet3.png' },
     'y-axis': { frames: 30, spriteFile: '/shipSpriteSheet1.png' },
@@ -46,13 +46,13 @@ export const createShipStore = (initState: ShipState = defaultShipState) => {
   return createStore<ShipStore>()((set, get) => ({
     ...initState,
     setFrame: (newFrame) =>
-      set((state) => ({
+      set(() => ({
         frame: newFrame,
       })),
-    setScale: (newScale) => set((state) => ({ scale: newScale })),
-    setRotation: (newRotation) => set((state) => ({ rotation: newRotation })),
-    setPosition: (newPosition) => set((state) => ({ position: newPosition })),
-    setSequence: (newSequence) => set((state) => ({ sequence: newSequence })),
+    setScale: (newScale) => set(() => ({ scale: newScale })),
+    setRotation: (newRotation) => set(() => ({ rotation: newRotation })),
+    setPosition: (newPosition) => set(() => ({ position: newPosition })),
+    setSequence: (newSequence) => set(() => ({ sequence: newSequence })),
     getSpriteSheet: () => {
       const state = get();
       return state.animationSequences[state.sequence as SequenceType].spriteFile;

@@ -3,9 +3,11 @@
     color: white;
     text-align: center;
     width: 100%;
+    font-size: small
 }
 .footerContainer{
-
+    margin-bottom: 2rem;
+    font-size:large;
 }
 .footerSubOne{
 }
@@ -14,9 +16,11 @@
 }
 
 .footerSubOneHeader{
-    padding: 1rem 0;
-    border-bottom: solid white 1px;
-    margin-bottom: 2rem;
+    /* padding: 1rem 0; */
+    border-bottom: white 1px solid;
+    width: fit-content;
+    /* height: 2rem; */
+    margin: 1rem auto;
 }
 
 .footerSubTwoHeader{

@@ -121,7 +121,7 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
     4
   )}`;
   const transformLaunchCopy3 = `${animateHTMLY(-20, .15)} ${animateHTMLX(
-    4.5,
+    16.5,
     0.01
   )}`;
 
@@ -139,7 +139,9 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
   const opacityCloudBank = scrollY < 30? calculateOpacity(20, 30, false): calculateOpacity(35, 40, true);
   const launchCopyTwoOpacity = calculateOpacity(25, 40, true);
   const launchCopyThreeOpacity = scrollY < 45? calculateOpacity(35, 45, false): calculateOpacity(50, 60, true);
-
+if(scrollY >= 66){
+  return
+}
   return (
     <div
       className={styles.wrapper}
