@@ -151,7 +151,7 @@ export default function Home() {
         formObject[key] = value.toString();
       });
 
-      fetch('/', {
+      fetch('/__contactform.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(formObject).toString(),
