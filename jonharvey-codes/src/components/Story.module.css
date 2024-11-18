@@ -1,0 +1,43 @@
+.storyWrapper {
+    width: 100%;
+    max-width: 177.78vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    z-index: var(--zindex-animation-base);
+    margin: auto;
+  }
+  .killSwitch{
+    border: rgb(66, 66, 66) 3px solid;
+    box-shadow: 1px 2px 1px;
+    position: absolute;
+    padding-top: 25%;
+    text-align: center;
+    text-shadow: 2rem;
+    font-size: 2rem;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: 0.5s;
+  }
+  .killSwitch:hover{
+    background-color: rgb(66, 66, 66);
+    opacity: 0.2;
+  }
+
+  @media (max-width: 640px) {
+    .killSwitch {
+      font-size: 1rem;
+    }
+  }
+  
+  /* Medium screens (md) */
+  @media (max-width: 768px) {
+    .killSwitch {
+    }
+  }
+  
