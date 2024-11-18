@@ -518,7 +518,7 @@ export default function Home() {
                 type='submit'
                 className='block w-full rounded-md bg-white/75 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
               >
-                let's talk
+                let&apos;s talk
               </button>
             </div>
           </form>
