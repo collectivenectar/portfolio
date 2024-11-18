@@ -150,7 +150,7 @@ export default function Home() {
       formData.forEach((value, key) => {
         formObject[key] = value.toString();
       });
-
+      console.log(new URLSearchParams(formObject).toString())
       fetch('/__contactform.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
