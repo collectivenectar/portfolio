@@ -270,7 +270,7 @@ export default function Home() {
             <img
               src={services[1].image}
               alt='test'
-              className='w-full min-h-36 lg:block lg:w-96 lg:h-96'
+              className='w-full min-h-36 mb-28 lg:block lg:w-96 lg:h-96'
             />
           </div>
           {/* Section 2 */}
@@ -289,7 +289,7 @@ export default function Home() {
             <img
               src={services[2].image}
               alt=''
-              className='w-full h-fit lg:block lg:w-96 lg:h-96'
+              className='w-full h-fit mb-28 lg:block lg:w-96 lg:h-96'
             />
           </div>
           {/* Section 3 */}
@@ -308,11 +308,11 @@ export default function Home() {
             <img
               src={services[3].image}
               alt=''
-              className='w-full h-fit lg:block lg:w-96 lg:h-96'
+              className='w-full h-fit mb-28 lg:block lg:w-96 lg:h-96'
             />
           </div>
           {/* Section 4 */}
-          <div className='flex-col-reverse gap-20 mt-12 px-2 lg:w-10/12 lg:p-20 lg:flex lg:flex-row-reverse justify-between self-end'>
+          <div className='flex-col-reverse gap-28 mt-12 px-2 lg:w-10/12 lg:p-20 lg:flex lg:flex-row-reverse justify-between self-end'>
             <div className='px-4 lg:w-50% lg:flex flex-col justify-center lg:ml-20'>
               <div className='relative'>
                 <div className={styles.backgroundArt4}></div>
@@ -327,12 +327,12 @@ export default function Home() {
             <img
               src={services[4].image}
               alt=''
-              className='w-full h-fit lg:block lg:w-96 lg:h-96'
+              className='w-full h-fit mb-28 lg:block lg:w-96 lg:h-96'
             />
           </div>
           {/* Section 5 */}
           <div className='flex-col-reverse gap-32 mt-12 px-2 lg:w-10/12 lg:p-20 lg:flex lg:flex-row justify-between lg:justify-around self-start'>
-            <div className='px-4 lg:w-50% lg:flex flex-col justify-center lg:mr-20'>
+            <div className='px-4 lg:w-50% pt-28 lg:flex flex-col justify-center lg:mr-20'>
               <div className='relative'>
                 <div className={styles.backgroundArt5}></div>
                 <span className='text-3xl max-w-full font-bold lg:text-4xl'>
