@@ -1,12 +1,11 @@
 'use client';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { set, throttle } from 'lodash';
+import { throttle } from 'lodash';
 
 import LaunchScene from './storyScenes/LaunchScene';
 import Ship from './storyScenes/Ship';
 
 import styles from './Story.module.css';
-import { kill } from 'process';
 
 const Story = () => {
 
@@ -157,7 +156,6 @@ const Story = () => {
     }
     return () => window.removeEventListener('resize', handleResize);
   }, [handleResize, storyContainerRect]);
-  console.log(virtualScrollY)
   return (
     <div
       ref={containerRef}
@@ -167,7 +165,7 @@ const Story = () => {
       }}
     >
       <div className={styles.killSwitch} onClick={() => handleKillSwitch()}>
-      {killSwitch ? 'Touch to start' : 'Scroll to move'}
+      {killSwitch ? 'Touch to start' : 'Scroll/drag to move'}
       </div>
       {!killSwitch && <LaunchScene
         scrollY={!killSwitch ? virtualScrollY : 0}
@@ -177,6 +175,7 @@ const Story = () => {
         StoryRect={storyContainerRect}
         scrollY={!killSwitch ? virtualScrollY : 0}
       />}
+      <span className='text-white absolute -top-2 text-3xl'>{virtualScrollY}</span>
     </div>
   );
 };

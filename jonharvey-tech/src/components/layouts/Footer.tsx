@@ -2,7 +2,7 @@ import styles from './Footer.module.css';
 
 const Footer = () => {
   return (
-    <footer className="font-serif text-white text-center w-full text-sm">
+    <footer className="text-white text-center w-full text-sm">
     <div className="mb-8 text-lg">
       <div>
         <h4 className="border-b border-white w-fit mx-auto my-4">Links</h4>

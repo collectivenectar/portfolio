@@ -42,21 +42,19 @@
 
 
 .backgroundArt1 {
-  position: absolute;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   z-index: -1;
-  top: 8rem;
-  left: 0rem;
+  margin: -2.5rem 0;
   animation: gradient 15s ease infinite;
   height: 0.1rem;
-  width: 42rem;
+  width: 100%;
 }
 
 /* Small screens (sm) */
 @media (max-width: 640px) {
   .backgroundArt1 {
     top: 2rem;
-    width: 16rem;
+    width: 100%;
   }
 }
 
@@ -64,19 +62,17 @@
 @media (max-width: 768px) {
   .backgroundArt1 {
     top: 2rem;
-    width: 16rem;
+    width: 100%;
   }
 }
 
 .backgroundArt2 {
-  position: absolute;
-  z-index: -1;
-  top: 8rem;
-  left: -14rem;
-  height: 0.1rem;
-  width: 30rem;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  z-index: -1;
+  margin: -2.5rem 0;
   animation: gradient 15s ease infinite;
+  height: 0.1rem;
+  width: 100%;
 }
 
 /* Small screens (sm) */
@@ -84,7 +80,7 @@
   .backgroundArt2 {
     top: 2rem;
     left: -2rem;
-    width: 16rem;
+    width: 100%;
   }
 }
 
@@ -93,26 +89,24 @@
   .backgroundArt2 {
     top: 2rem;
     left: -2rem;
-    width: 16rem;
+    width: 100%;
   }
 }
 
 .backgroundArt3 {
-  position: absolute;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   z-index: -1;
-  top: 8rem;
-  left: 0rem;
+  margin: -2.5rem 0;
   animation: gradient 15s ease infinite;
   height: 0.1rem;
-  width: 42rem;
+  width: 100%;
 }
 
 /* Small screens (sm) */
 @media (max-width: 640px) {
   .backgroundArt3 {
     top: 2rem;
-    width: 16rem;
+    width: 100%;
   }
 }
 
@@ -120,19 +114,17 @@
 @media (max-width: 768px) {
   .backgroundArt3 {
     top: 2rem;
-    width: 16rem;
+    width: 100%;
   }
 }
 
 .backgroundArt4 {
-  position: absolute;
-  z-index: -1;
-  top: 9rem;
-  left: -18rem;
-  height: 0.1rem;
-  width: 42rem;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  z-index: -1;
+  margin: -2.5rem 0;
   animation: gradient 15s ease infinite;
+  height: 0.1rem;
+  width: 100%;
 }
 
 /* Small screens (sm) */
@@ -140,7 +132,7 @@
   .backgroundArt4 {
     top: 2rem;
     left: -2rem;
-    width: 16rem;
+    width: 100%;
   }
 }
 
@@ -149,26 +141,24 @@
   .backgroundArt4 {
     top: 2rem;
     left: -2rem;
-    width: 16rem;
+    width: 100%;
   }
 }
 
 .backgroundArt5 {
-  position: absolute;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   z-index: -1;
-  top: 10rem;
-  left: 0rem;
+  margin: -4.5rem 0;
   animation: gradient 15s ease infinite;
-  height: 0.05rem;
-  width: 42rem;
+  height: 0.1rem;
+  width: 100%;
 }
 
 /* Small screens (sm) */
 @media (max-width: 640px) {
   .backgroundArt5 {
     top: 2rem;
-    width: 16rem;
+    width: 100%;
   }
 }
 
@@ -176,7 +166,7 @@
 @media (max-width: 768px) {
   .backgroundArt5 {
     top: 2rem;
-    width: 16rem;
+    width: 100%;
   }
 }
 
@@ -190,6 +180,62 @@
   100% {
     background-position: 0% 50%;
   }
+}
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Make sure the section takes the full screen */
+  overflow: hidden; /* Hide anything that overflows the section */
+}
+
+.polygon-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* Make sure it doesn't interfere with interactions */
+  z-index: -1; /* Keep it behind the content */
+}
+
+.polygon {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 10%;
+  left: 10%;
+  background: linear-gradient(135deg, #ff007a, #00d2ff);
+  clip-path: polygon(
+    50% 0%, 
+    90% 25%, 
+    100% 75%, 
+    60% 100%, 
+    20% 75%, 
+    0% 25%
+  );
+  filter: blur(30px); /* Apply blur to the outer layer */
+  opacity: 0.6;
+  z-index: 1; /* Ensure it's on top of the blurred layer */
+}
+
+.polygon-blurred {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 10%;
+  left: 10%;
+  background: linear-gradient(135deg, #ff007a, #00d2ff);
+  clip-path: polygon(
+    50% 0%, 
+    90% 25%, 
+    100% 75%, 
+    60% 100%, 
+    20% 75%, 
+    0% 25%
+  );
+  filter: blur(50px); /* More blur for diffusion effect */
+  opacity: 0.6;
+  z-index: 1; /* Make sure it's behind the sharp polygon */
 }
 
 
