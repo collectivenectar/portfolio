@@ -175,7 +175,7 @@ const Story = () => {
         StoryRect={storyContainerRect}
         scrollY={!killSwitch ? virtualScrollY : 0}
       />}
-      <span className='text-white absolute -top-2 text-3xl'>{virtualScrollY}</span>
+      {/* <span className='text-white absolute -top-2 text-3xl'>{virtualScrollY}</span> */}
     </div>
   );
 };

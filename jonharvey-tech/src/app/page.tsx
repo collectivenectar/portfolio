@@ -10,7 +10,7 @@ import Story from './components/Story';
 
 const about = {
   1: 'Expertise in creative strategy, user engagement, and experience design. I help teams deliver impactful digital products by leveraging modern software tools and cloud services for faster, more efficient solutions.',
-  2: "Since 2020, I've been delivering tailored IT solutions by combining technical expertise with a deep understanding of user experience and design principles. My approach integrates market research, usability testing, and interactive design to craft intuitive and scalable applications.",
+  2: "",
 };
 
 const services = {
@@ -156,7 +156,7 @@ export default function Home() {
   return (
     <div className='flex-col h-full justify-start text-white'>
       {/* HERO */}
-      <section className='w-full min-h-fit lg:h-screen p-0 text-white'>
+      <section id="hero" className='w-full min-h-fit lg:h-screen p-0 text-white'>
         <div
           aria-hidden='true'
           className='absolute inset-x-0 top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-40'
@@ -203,7 +203,8 @@ export default function Home() {
         <Story />
       </section>
       {/* ABOUT */}
-      <section className='min-h-fit relative'>
+      <section 
+      id="about" className='min-h-fit relative'>
         <div
           className='px-4 lg:w-full h-fit lg:flex lg:flex-col 
         lg:justify-between lg:items-center lg:pt-5 lg:text-2xl 
@@ -235,9 +236,10 @@ export default function Home() {
             <div
               className='pr-4 font-Outfit mx-auto w-11/12 mt-12 
             lg:pr-30 lg:pl-24 text-lg lg:-mb-32
-             lg:text-2xl'
+             lg:text-xl'
             >
-              {about[1]}
+              <b className="text-teal-200 text-2xl">{about[1].split(".")[0]}.</b>
+              {about[1].split(".").slice(1).join(".")}
             </div>
             <img
               className='w-11/12 h-11/12 mx-auto lg:w-96 
@@ -260,7 +262,9 @@ export default function Home() {
               alt=''
             />
             <div className='mx-auto font-Outfit w-11/12 text-lg mt-12 lg:w-8/12 lg:text-left lg:text-2xl lg:mr-38 lg:pl-28'>
-              {about[2]}
+            {"Since 2020, I've been delivering tailored IT solutions by combining technical expertise with a deeper understanding of "}
+            <b className="text-teal-600">{"user experience and design principles"}</b>
+            {". My approach integrates market research, usability testing, and interactive design to craft intuitive and scalable applications."}
             </div>
           </div>
         </div>
@@ -292,7 +296,7 @@ export default function Home() {
             <img
               src={services[1].image}
               alt='test'
-              className='w-full min-h-36 lg:block lg:w-96 lg:h-96 lg:pt-0'
+              className='w-full min-h-36 lg:block lg:w-64 lg:h-64 lg:pt-0'
             />
           </div>
           {/* Section 2 */}
@@ -312,7 +316,7 @@ export default function Home() {
             <img
               src={services[2].image}
               alt=''
-              className='w-full h-fit lg:pt-20 lg:block lg:w-96 lg:h-96'
+              className='w-full h-fit lg:pt-10 lg:block lg:w-72 lg:h-72'
             />
           </div>
           <div
@@ -345,21 +349,21 @@ export default function Home() {
             <img
               src={services[3].image}
               alt=''
-              className='w-full h-fit lg:pt-20 lg:block lg:w-96 lg:h-96'
+              className='w-full h-fit lg:pt-10 lg:block lg:w-64 lg:h-64'
             />
           </div>
           {/* Section 4 */}
           <div className='flex-col-reverse relative gap-28 px-2 lg:w-10/12 lg:flex lg:flex-row-reverse justify-between lg:gap-0 self-end'>
             <div
               aria-hidden='true'
-              className='absolute inset-x-0 lg:top-48 lg:-right-96 lg:left-[calc(60%+6rem)] -z-10 transform-gpu overflow-hidden blur-2xl'
+              className='absolute inset-x-0 lg:top-4 -z-10 lg:-right-96 lg:left-[calc(60%+6rem)] transform-gpu overflow-hidden blur-2xl'
             >
               <MorphingPolygon
                 basePoints={
                   POLYGON_PRESETS.WAVE as unknown as [number, number][]
                 }
                 style={{
-                  transform: 'translateX(-30%) rotate(0deg)',
+                  transform: 'translateX(-70%) rotate(0deg)',
                 }}
               />
             </div>
@@ -377,7 +381,7 @@ export default function Home() {
             <img
               src={services[4].image}
               alt=''
-              className='w-full h-fit lg:pt-20 lg:block lg:w-96 lg:h-96'
+              className='w-full h-fit lg:pt-10 lg:block lg:w-64 lg:h-64'
             />
           </div>
           {/* Section 5 */}
@@ -389,23 +393,23 @@ export default function Home() {
                   {services[5].title}
                 </span>
               </div>
-              <p className='text-lg mt-4 font-Outfit lg:text-2xl lg:mt-10'>
+              <p className='text-lg mt-4 z-50 font-Outfit lg:text-2xl lg:mt-10'>
                 {services[5].description}
               </p>
             </div>
             <img
               src={services[5].image}
               alt=''
-              className='w-full h-fit lg:pt-20 lg:block lg:w-96 lg:h-96'
+              className='w-full h-fit lg:pt-10 lg:block lg:w-64 lg:h-64'
             />
           </div>
         </div>
       </section>
 
       {/* PROCESS  */}
-      <section className='mt-48'>
+      <section id="process" className='mt-48'>
         <div className='w-full flex flex-col items-center'>
-          <h2 className='bg-white/15 font-Outfit h-20 py-5 w-full text-4xl lg:text-4xl lg:h-24 mb-20 text-center'>
+          <h2 className='bg-white/15 z-10 font-Outfit h-20 py-5 w-full text-4xl lg:text-4xl lg:h-24 mb-20 text-center'>
             my process
           </h2>
           <p className='text-xl font-Outfit lg:text-2xl mt-10 text-center'>
@@ -456,7 +460,7 @@ export default function Home() {
         id='contact'
         className='mt-12 h-fit'
       >
-        <div className='bg-white/15 px-6 py-24 sm:py-32 lg:px-8'>
+        <div className='bg-teal-200/15 px-6 py-24 sm:py-32 lg:px-8'>
           <div className='mx-auto max-w-2xl text-center'>
             <h2 className='text-3xl font-bold tracking-tight text-white sm:text-4xl'>
               contact me
@@ -484,7 +488,7 @@ export default function Home() {
                     name='name'
                     type='text'
                     autoComplete='given-name, surname'
-                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6'
+                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
                   />
                 </div>
               </div>
@@ -501,7 +505,7 @@ export default function Home() {
                     name='company'
                     type='text'
                     autoComplete='organization'
-                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6'
+                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
                   />
                 </div>
               </div>
@@ -518,7 +522,7 @@ export default function Home() {
                     name='email'
                     type='email'
                     autoComplete='email'
-                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6'
+                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
                   />
                 </div>
               </div>
@@ -535,7 +539,7 @@ export default function Home() {
                     name='phone-number'
                     type='tel'
                     autoComplete='tel'
-                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6'
+                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
                   />
                 </div>
               </div>
@@ -551,7 +555,7 @@ export default function Home() {
                     id='message'
                     name='message'
                     rows={4}
-                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6'
+                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
                     defaultValue={''}
                   />
                 </div>
@@ -560,7 +564,7 @@ export default function Home() {
             <div className='mt-10'>
               <button
                 type='submit'
-                className='block w-full rounded-md bg-white/75 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
+                className='block w-full rounded-md bg-teal-200/85 px-3.5 py-2.5 text-center text-sm font-semibold transition-colors text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
               >
                 let&apos;s talk
               </button>
