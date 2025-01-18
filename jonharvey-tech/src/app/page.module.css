@@ -3,7 +3,7 @@
 }
 .insights {
   padding: 5rem 0;
-  font-family: 'Outfit', serif;
+  font-family: "Outfit", serif;
   margin-top: 10rem;
   height: 50vh;
   width: 100%;
@@ -25,7 +25,7 @@
   border-radius: 35px;
 }
 .contact {
-  font-family: 'Outfit', serif;
+  font-family: "Outfit", serif;
   height: 35vh;
   display: flex;
   flex-direction: row;
@@ -39,135 +39,18 @@
   border-radius: 35px;
 }
 
-
-
-.backgroundArt1 {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  z-index: -1;
-  margin: -2.5rem 0;
-  animation: gradient 15s ease infinite;
-  height: 0.1rem;
-  width: 100%;
-}
-
-/* Small screens (sm) */
-@media (max-width: 640px) {
-  .backgroundArt1 {
-    top: 2rem;
-    width: 100%;
-  }
-}
-
-/* Medium screens (md) */
-@media (max-width: 768px) {
-  .backgroundArt1 {
-    top: 2rem;
-    width: 100%;
-  }
-}
-
-.backgroundArt2 {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  z-index: -1;
-  margin: -2.5rem 0;
-  animation: gradient 15s ease infinite;
-  height: 0.1rem;
-  width: 100%;
-}
-
-/* Small screens (sm) */
-@media (max-width: 640px) {
-  .backgroundArt2 {
-    top: 2rem;
-    left: -2rem;
-    width: 100%;
-  }
-}
-
-/* Medium screens (md) */
-@media (max-width: 768px) {
-  .backgroundArt2 {
-    top: 2rem;
-    left: -2rem;
-    width: 100%;
-  }
-}
-
-.backgroundArt3 {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  z-index: -1;
-  margin: -2.5rem 0;
-  animation: gradient 15s ease infinite;
-  height: 0.1rem;
-  width: 100%;
-}
-
-/* Small screens (sm) */
-@media (max-width: 640px) {
-  .backgroundArt3 {
-    top: 2rem;
-    width: 100%;
-  }
-}
-
-/* Medium screens (md) */
-@media (max-width: 768px) {
-  .backgroundArt3 {
-    top: 2rem;
-    width: 100%;
-  }
-}
-
-.backgroundArt4 {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  z-index: -1;
-  margin: -2.5rem 0;
-  animation: gradient 15s ease infinite;
-  height: 0.1rem;
-  width: 100%;
-}
-
-/* Small screens (sm) */
-@media (max-width: 640px) {
-  .backgroundArt4 {
-    top: 2rem;
-    left: -2rem;
-    width: 100%;
-  }
-}
-
-/* Medium screens (md) */
-@media (max-width: 768px) {
-  .backgroundArt4 {
-    top: 2rem;
-    left: -2rem;
-    width: 100%;
-  }
-}
-
+.backgroundArt1,
+.backgroundArt2,
+.backgroundArt3,
+.backgroundArt4,
 .backgroundArt5 {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  z-index: -1;
-  margin: -4.5rem 0;
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
   animation: gradient 15s ease infinite;
   height: 0.1rem;
   width: 100%;
-}
-
-/* Small screens (sm) */
-@media (max-width: 640px) {
-  .backgroundArt5 {
-    top: 2rem;
-    width: 100%;
-  }
-}
-
-/* Medium screens (md) */
-@media (max-width: 768px) {
-  .backgroundArt5 {
-    top: 2rem;
-    width: 100%;
-  }
 }
 
 @keyframes gradient {
@@ -205,14 +88,7 @@
   top: 10%;
   left: 10%;
   background: linear-gradient(135deg, #ff007a, #00d2ff);
-  clip-path: polygon(
-    50% 0%, 
-    90% 25%, 
-    100% 75%, 
-    60% 100%, 
-    20% 75%, 
-    0% 25%
-  );
+  clip-path: polygon(50% 0%, 90% 25%, 100% 75%, 60% 100%, 20% 75%, 0% 25%);
   filter: blur(30px); /* Apply blur to the outer layer */
   opacity: 0.6;
   z-index: 1; /* Ensure it's on top of the blurred layer */
@@ -225,17 +101,8 @@
   top: 10%;
   left: 10%;
   background: linear-gradient(135deg, #ff007a, #00d2ff);
-  clip-path: polygon(
-    50% 0%, 
-    90% 25%, 
-    100% 75%, 
-    60% 100%, 
-    20% 75%, 
-    0% 25%
-  );
+  clip-path: polygon(50% 0%, 90% 25%, 100% 75%, 60% 100%, 20% 75%, 0% 25%);
   filter: blur(50px); /* More blur for diffusion effect */
   opacity: 0.6;
   z-index: 1; /* Make sure it's behind the sharp polygon */
 }
-
-

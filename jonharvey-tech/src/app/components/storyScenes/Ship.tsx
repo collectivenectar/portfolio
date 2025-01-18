@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useShipStore } from '@/providers/ShipStoreProvider';
-import styles from './Ship.module.css';
+import React, { useState, useEffect } from "react";
+import { useShipStore } from "../../providers/ShipStoreProvider";
+import styles from "./Ship.module.css";
 
 export type ShipProps = {
   scrollY: number;
@@ -10,32 +10,29 @@ export type ShipProps = {
 const Ship: React.FC<ShipProps> = (props) => {
   const { StoryRect, scrollY } = props;
 
-  const {
-    position,
-    rotation,
-    frame,
-    sequence,
-    getSpriteSheet,
-  } = useShipStore((state) => state);
+  const { position, rotation, frame, sequence, getSpriteSheet } = useShipStore(
+    (state) => state
+  );
 
   // Ship spritesheet frame size in pixels
   const frameWidth = 270;
   const frameHeight = 270;
-  
+
   // Spritesheet length in frames
   const numFrames = 30;
 
   // Normalizing vars pulled from parent container
-  const maxHeight = StoryRect? StoryRect.width * 0.5225: 0;
-  const maxWidth = StoryRect? StoryRect.height * 1.7778: 0;
+  const maxHeight = StoryRect ? StoryRect.width * 0.5225 : 0;
+  const maxWidth = StoryRect ? StoryRect.height * 1.7778 : 0;
 
   // Fixed aspect ratio of parent container
   const aspectRatio = 100 / 52.25;
 
   // Automatic scaling var for ship spritesheet frames, aka makes it responsive
-  const scalingFactor = Math.min(maxHeight / frameHeight, maxWidth / (frameWidth * aspectRatio)) / 4;
+  const scalingFactor =
+    Math.min(maxHeight / frameHeight, maxWidth / (frameWidth * aspectRatio)) /
+    4;
 
-  
   // Calculations for scaling the ship frame size relative to container dimensions
   const scaledFrameWidth = frameWidth * scalingFactor;
   const scaledFrameHeight = frameHeight * scalingFactor;
@@ -49,26 +46,26 @@ const Ship: React.FC<ShipProps> = (props) => {
   // Var for rotating sprite frame around the containers center point
   const rotateSprite = `rotate(${rotation}deg)`;
 
-  const [spriteSheet, setSpriteSheet] = useState<string>('');
+  const [spriteSheet, setSpriteSheet] = useState<string>("");
 
   useEffect(() => {
     setSpriteSheet(getSpriteSheet());
   }, [sequence]);
-  if(scrollY < 0){
-    return null
+  if (scrollY < 0) {
+    return null;
   }
-  if(scrollY >= 66){
-    return
-  }else{
+  if (scrollY >= 66) {
+    return;
+  } else {
     return (
       <div
         className={styles.spriteContainer}
         style={{
           transform: `translate(${position[0]}px, ${position[1]}px)`,
-          transition: 'transform 0.3s ease-out',
-          willChange: 'transform',
+          transition: "transform 0.3s ease-out",
+          willChange: "transform",
           minHeight: `100%`,
-          maxHeight: `100%`
+          maxHeight: `100%`,
         }}
       >
         <div className={styles.scaleContainer}>
@@ -81,7 +78,7 @@ const Ship: React.FC<ShipProps> = (props) => {
               height: `${scaledFrameHeight}px`,
               backgroundPosition,
               transform: rotateSprite,
-              willChange: 'background-position, transform',
+              willChange: "background-position, transform",
             }}
           ></div>
         </div>

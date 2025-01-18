@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import Image from 'next/image';
+import React, { useEffect } from "react";
+import Image from "next/image";
 
-import styles from './LaunchScene.module.css';
+import styles from "./LaunchScene.module.css";
 
-import { useShipStore } from '@/providers/ShipStoreProvider';
-import moveShip from '../../util/moveShip';
+import { useShipStore } from "../../providers/ShipStoreProvider";
+import moveShip from "../../util/moveShip";
 
 interface LaunchSceneProps {
   scrollY: number;
@@ -47,7 +47,7 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
           normalizeToRect([22, -30], boundingRect),
           normalizeToRect([44, -65], boundingRect),
           normalizeToRect([44, -0], boundingRect),
-          normalizeToRect([44, 0], boundingRect)
+          normalizeToRect([44, 0], boundingRect),
         ],
         weights: [10, 15, 15, 35, 25],
         scrollY,
@@ -61,7 +61,7 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
   useEffect(() => {
     // setting the animation for this scene to have the ship use the spritesheet for rotating
     // the ship around its y-axis
-    setSequence('y-axis');
+    setSequence("y-axis");
   }, [setSequence]);
 
   // keeping the component rendered only when scroll position is within this scenes range
@@ -116,11 +116,11 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
     20,
     -1.7
   )}`;
-  const transformLaunchCopy2 = `${animateHTMLY(-65, .5)} ${animateHTMLX(
+  const transformLaunchCopy2 = `${animateHTMLY(-65, 0.5)} ${animateHTMLX(
     -55,
     4
   )}`;
-  const transformLaunchCopy3 = `${animateHTMLY(-20, .15)} ${animateHTMLX(
+  const transformLaunchCopy3 = `${animateHTMLY(-20, 0.15)} ${animateHTMLX(
     16.5,
     0.01
   )}`;
@@ -130,44 +130,51 @@ const LaunchScene: React.FC<LaunchSceneProps> = ({ scrollY, boundingRect }) => {
     opacityEndScroll: number,
     endOpacityAtFull: boolean
   ) => {
-    if (scrollY < opacityStartScroll) return endOpacityAtFull? 1: 0;
-    if (scrollY > opacityEndScroll) return endOpacityAtFull? 0: 1;
-    return endOpacityAtFull? 1 - (scrollY - opacityStartScroll) / (opacityEndScroll - opacityStartScroll):
-    (scrollY - opacityStartScroll) / (opacityEndScroll - opacityStartScroll);
+    if (scrollY < opacityStartScroll) return endOpacityAtFull ? 1 : 0;
+    if (scrollY > opacityEndScroll) return endOpacityAtFull ? 0 : 1;
+    return endOpacityAtFull
+      ? 1 -
+          (scrollY - opacityStartScroll) /
+            (opacityEndScroll - opacityStartScroll)
+      : (scrollY - opacityStartScroll) /
+          (opacityEndScroll - opacityStartScroll);
   };
 
-  const opacityCloudBank = scrollY < 30? calculateOpacity(20, 30, false): calculateOpacity(35, 40, true);
+  const opacityCloudBank =
+    scrollY < 30
+      ? calculateOpacity(20, 30, false)
+      : calculateOpacity(35, 40, true);
   const launchCopyTwoOpacity = calculateOpacity(25, 40, true);
-  const launchCopyThreeOpacity = scrollY < 45? calculateOpacity(35, 45, false): calculateOpacity(50, 60, true);
-if(scrollY >= 66){
-  return
-}
+  const launchCopyThreeOpacity =
+    scrollY < 45
+      ? calculateOpacity(35, 45, false)
+      : calculateOpacity(50, 60, true);
+  if (scrollY >= 66) {
+    return;
+  }
   return (
-    <div
-      className={styles.wrapper}
-      style={{ zIndex: 0 }}
-    >
+    <div className={styles.wrapper} style={{ zIndex: 0 }}>
       <div
         className={styles.deepSpace}
         style={{
           transform: transformSpace,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
         }}
       >
         <Image
-          src='/images/deepspace2.png'
-          alt='background sky'
-          layout='responsive'
+          src="/images/deepspace2.png"
+          alt="background sky"
+          layout="responsive"
           width={500}
           height={500}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
       <div
         className={styles.launchCopy1}
         style={{
           transform: transformLaunchCopy1,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
         }}
       >
         <h2>EXECUTE ON YOUR VISION</h2>
@@ -176,7 +183,7 @@ if(scrollY >= 66){
         className={styles.launchCopy2}
         style={{
           transform: transformLaunchCopy2,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
           opacity: launchCopyTwoOpacity,
         }}
       >
@@ -186,7 +193,7 @@ if(scrollY >= 66){
         className={styles.launchCopy3}
         style={{
           transform: transformLaunchCopy3,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
           opacity: launchCopyThreeOpacity,
         }}
       >
@@ -196,16 +203,16 @@ if(scrollY >= 66){
         className={styles.launchGlobeSpace}
         style={{
           transform: transformGlobeSpace,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
         }}
       >
         <Image
-          src='/images/globe-space.png'
-          alt='background sky'
-          layout='responsive'
+          src="/images/globe-space.png"
+          alt="background sky"
+          layout="responsive"
           width={500}
           height={472}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
 
@@ -213,179 +220,179 @@ if(scrollY >= 66){
         className={styles.launchSky}
         style={{
           transform: transformSky,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
         }}
       >
         <Image
-          src='/images/launch-sky.png'
-          alt='background sky'
-          layout='responsive'
+          src="/images/launch-sky.png"
+          alt="background sky"
+          layout="responsive"
           width={500}
           height={676}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
       <div
         className={styles.launchCloudBank}
         style={{
           transform: transformCloudBank1,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
         }}
       >
         <Image
-          src='/images/cloudbank1.png'
-          alt='background clouds'
-          layout='responsive'
+          src="/images/cloudbank1.png"
+          alt="background clouds"
+          layout="responsive"
           width={500}
           height={136}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
       <div
         className={styles.launchCloudBank}
         style={{
           transform: transformCloudBank2,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
         }}
       >
         <Image
-          src='/images/cloudbank2.png'
-          alt='background clouds'
-          layout='responsive'
+          src="/images/cloudbank2.png"
+          alt="background clouds"
+          layout="responsive"
           width={500}
           height={188}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
       <div
         className={styles.launchCloudBank}
         style={{
           transform: transformCloudBank3,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
           opacity: opacityCloudBank,
         }}
       >
         <Image
-          src='/images/cloudbank3.png'
-          alt='background clouds'
-          layout='responsive'
+          src="/images/cloudbank3.png"
+          alt="background clouds"
+          layout="responsive"
           width={500}
           height={183}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
       <div
         className={styles.launchCloudBank}
         style={{
           transform: transformCloudBank4,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
           opacity: opacityCloudBank,
         }}
       >
         <Image
-          src='/images/cloudbank4.png'
-          alt='background clouds'
-          layout='responsive'
+          src="/images/cloudbank4.png"
+          alt="background clouds"
+          layout="responsive"
           width={500}
           height={188}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
       <div
         className={styles.launchCloudBank}
         style={{
           transform: transformCloudBank5,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
           opacity: opacityCloudBank,
         }}
       >
         <Image
-          src='/images/cloudbank5.png'
-          alt='background clouds'
-          layout='responsive'
+          src="/images/cloudbank5.png"
+          alt="background clouds"
+          layout="responsive"
           width={500}
           height={133}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
       <div
         className={styles.launchClouds}
         style={{
           transform: transformClouds,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
         }}
       >
         <Image
-          src='/images/launch-cloud.png'
-          alt='background clouds'
-          layout='responsive'
+          src="/images/launch-cloud.png"
+          alt="background clouds"
+          layout="responsive"
           width={500}
           height={215}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
       <div
         className={styles.launchGround3}
         style={{
           transform: transformGround3,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
         }}
       >
         <Image
-          src='/images/launch-3.png'
-          alt='foreground-2'
-          layout='responsive'
+          src="/images/launch-3.png"
+          alt="foreground-2"
+          layout="responsive"
           width={500}
           height={316}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
       <div
         className={styles.launchGround2}
         style={{
           transform: transformGround2,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
         }}
       >
         <Image
-          src='/images/launch-2.png'
-          alt='foreground-1'
-          layout='responsive'
+          src="/images/launch-2.png"
+          alt="foreground-1"
+          layout="responsive"
           width={500}
           height={290}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
       <div
         className={styles.launchGround1}
         style={{
           transform: transformGround1,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
         }}
       >
         <Image
-          src='/images/launch-1.png'
-          alt='foreground-0'
-          layout='responsive'
+          src="/images/launch-1.png"
+          alt="foreground-0"
+          layout="responsive"
           width={500}
           height={300}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
       <div
         className={styles.launchGround0}
         style={{
           transform: transformGround0,
-          transition: 'transform 0.3s ease-out',
+          transition: "transform 0.3s ease-out",
         }}
       >
         <Image
-          src='/images/launch-0.png'
-          alt='Launch pad'
-          layout='responsive'
+          src="/images/launch-0.png"
+          alt="Launch pad"
+          layout="responsive"
           width={500}
           height={113}
-          objectFit='cover'
+          objectFit="cover"
         />
       </div>
     </div>
