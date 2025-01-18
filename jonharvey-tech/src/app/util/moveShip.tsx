@@ -1,4 +1,4 @@
-import { useShipStore } from "@/providers/ShipStoreProvider";
+import { useShipStore } from "../providers/ShipStoreProvider";
 
 type ShipParams = {
     start: number[];                // Starting [x, y] position
