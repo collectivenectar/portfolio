@@ -5,12 +5,14 @@ import MorphingPolygon, {
 } from './components/css/MorphingPolygon';
 
 import { useState, useEffect, useRef } from 'react';
+import { useForm } from '@tanstack/react-form';
+import { contactFormSchema, type ContactFormType } from './util/types';
 
 import Story from './components/Story';
 
 const about = {
   1: 'Expertise in creative strategy, user engagement, and experience design. I help teams deliver impactful digital products by leveraging modern software tools and cloud services for faster, more efficient solutions.',
-  2: "",
+  2: '',
 };
 
 const services = {
@@ -84,79 +86,42 @@ const toolset = {
 };
 
 export default function Home() {
-  const formRef = useRef<HTMLFormElement>(null);
+  const form = useForm<ContactFormType>({
+    defaultValues: {
+      name: '',
+      email: '',
+      phoneNumber: '',
+      message: '',
+    },
+    onSubmit: async (values) => {
+      try {
+        const formObject: Record<string, string> = {};
+        Object.entries(values).forEach(([key, value]) => {
+          formObject[key] = value.toString();
+        });
 
-  const validateForm = (form: HTMLFormElement): string[] => {
-    const errors: string[] = [];
-    const formData = new FormData(form);
-
-    // Validate first name
-    if (!formData.get('name')) {
-      errors.push('name is required.');
-    }
-
-    // Validate email
-    const email = formData.get('email') as string;
-    if (!email) {
-      errors.push('Email is required.');
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errors.push('Email is invalid.');
-    }
-
-    // Validate message
-    if (!formData.get('message')) {
-      errors.push('Message is required.');
-    }
-
-    return errors;
-  };
-
-  const handleSubmit = (event: SubmitEvent) => {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-
-    const errors = validateForm(form as HTMLFormElement);
-
-    if (errors.length > 0) {
-      alert(`Please fix the following errors:\n- ${errors.join('\n- ')}`);
-      return;
-    }
-
-    if (form) {
-      const formData = new FormData(form as HTMLFormElement);
-
-      const formObject: Record<string, string> = {};
-      formData.forEach((value, key) => {
-        formObject[key] = value.toString();
-      });
-      fetch('/__contactform.html', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formObject).toString(),
-      })
-        .then(() => console.log('Form successfully submitted'))
-        .catch((error) => alert(error));
-    }
-  };
-
-  useEffect(() => {
-    const form = formRef.current;
-    if (form) {
-      form.addEventListener('submit', handleSubmit);
-    }
-
-    return () => {
-      if (form) {
-        form.removeEventListener('submit', handleSubmit);
+        await fetch('/__contactform.html', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formObject).toString(),
+        });
+        console.log('Form successfully submitted');
+      } catch (error) {
+        console.error('Form submission failed:', error);
       }
-    };
-  }, []);
+    },
+    validators: {
+      onChange: contactFormSchema,
+    },
+  });
 
   return (
     <div className='flex-col h-full justify-start text-white'>
       {/* HERO */}
-      <section id="hero" className='w-full min-h-fit lg:h-screen p-0 text-white'>
+      <section
+        id='hero'
+        className='w-full min-h-fit lg:h-screen p-0 text-white'
+      >
         <div
           aria-hidden='true'
           className='absolute inset-x-0 top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-40'
@@ -181,7 +146,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className=" h-16 flex items-center justify-left pl-2 gap-4">
+            <div className=' h-16 flex items-center justify-left pl-2 gap-4'>
               <a
                 href='#contact'
                 className='px-4 w-fit text-center py-1 border-white border-2 rounded-3xl h-10 bg-black hover:bg-white hover:text-black transition-bg duration-500 lg:w-40 lg:text-2xl lg:py-1 lg:h-12 text-lg'
@@ -203,8 +168,10 @@ export default function Home() {
         <Story />
       </section>
       {/* ABOUT */}
-      <section 
-      id="about" className='min-h-fit relative'>
+      <section
+        id='about'
+        className='min-h-fit relative'
+      >
         <div
           className='px-4 lg:w-full h-fit lg:flex lg:flex-col 
         lg:justify-between lg:items-center lg:pt-5 lg:text-2xl 
@@ -238,8 +205,10 @@ export default function Home() {
             lg:pr-30 lg:pl-24 text-lg lg:-mb-32
              lg:text-xl'
             >
-              <b className="text-teal-200 text-2xl">{about[1].split(".")[0]}.</b>
-              {about[1].split(".").slice(1).join(".")}
+              <b className='text-teal-200 text-2xl'>
+                {about[1].split('.')[0]}.
+              </b>
+              {about[1].split('.').slice(1).join('.')}
             </div>
             <img
               className='w-11/12 h-11/12 mx-auto lg:w-96 
@@ -262,9 +231,15 @@ export default function Home() {
               alt=''
             />
             <div className='mx-auto font-Outfit w-11/12 text-lg mt-12 lg:w-8/12 lg:text-left lg:text-2xl lg:mr-38 lg:pl-28'>
-            {"Since 2020, I've been delivering tailored IT solutions by combining technical expertise with a deeper understanding of "}
-            <b className="text-teal-600">{"user experience and design principles"}</b>
-            {". My approach integrates market research, usability testing, and interactive design to craft intuitive and scalable applications."}
+              {
+                "Since 2020, I've been delivering tailored IT solutions by combining technical expertise with a deeper understanding of "
+              }
+              <b className='text-teal-600'>
+                {'user experience and design principles'}
+              </b>
+              {
+                '. My approach integrates market research, usability testing, and interactive design to craft intuitive and scalable applications.'
+              }
             </div>
           </div>
         </div>
@@ -279,7 +254,7 @@ export default function Home() {
             what can I do for you?
           </h2>
         </div>
-        <div className='flex flex-col w-full gap-10 items-center px-4'>
+        <div className='flex flex-col w-full gap-24 items-center px-4'>
           {/* Section 1 */}
           <div className='flex-col-reverse gap-20 px-2 lg:w-10/12 lg:flex lg:flex-row justify-between lg:gap-0 lg:justify-around self-start'>
             <div className='px-4 lg:w-50% lg:flex lg:w-1/2 lg:flex-col lg:justify-center lg:mr-20'>
@@ -407,7 +382,10 @@ export default function Home() {
       </section>
 
       {/* PROCESS  */}
-      <section id="process" className='mt-48'>
+      <section
+        id='process'
+        className='mt-48'
+      >
         <div className='w-full flex flex-col items-center'>
           <h2 className='bg-white/15 z-10 font-Outfit h-20 py-5 w-full text-4xl lg:text-4xl lg:h-24 mb-20 text-center'>
             my process
@@ -418,28 +396,28 @@ export default function Home() {
           <div className='text-lg flex flex-col items-center lg:w-3/4 lg:gap-10 lg:mt-10'>
             {/* STEP 1: Consultation & Planning */}
 
-            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 bg-white/5 rounded-xl lg:p-5'>
-              <b>Step 1:</b> <br /> Plan - Book a free 20 minute consultation
+            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/30 rounded-xl lg:p-5'>
+            <b className="text-2xl">Step 1: &#x1F441;</b>  <br /> Plan - Book a free 20 minute consultation
               with me to share your vision and requirements, and outline the
-              projects scope and timelines. If we decide to move forward, we can
-              meet again for more details and arrange a contract to start with.
+              projects scope and timelines. If we decide to move forward, we
+              may plan more time to discuss required details, billed hourly or at a fixed price. 	
             </span>
-            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 bg-white/10 rounded-xl lg:p-5'>
-              Step 2: <br /> Get building! - I may create wireframes, data
+            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/40 rounded-xl lg:p-5'>
+              <b className="text-2xl">Step 2:</b> &#x1F527;<br /> Get building! - I may create wireframes, data
               models, and mockups for your approval. Build and integrate
               front-end and back-end components.
             </span>
-            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 bg-white/15 rounded-xl lg:p-5'>
-              Step 3: <br />
+            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/60 rounded-xl lg:p-5'>
+            <b className="text-2xl">Step 3:</b> &#x1F575;<br />
               Test - Ensure everything works seamlessly. Deploy your application
               or site to a live audience. Get useful feedback, iterate, and
               improve!
             </span>
 
-            <span className='w-11/12 mt-6 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 bg-white/30 rounded-xl lg:p-5'>
-              <b className=''>Post launch support: </b>
+            <span className='w-11/12 mt-6 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/80 rounded-xl lg:p-5'>
+              <b className=''><b className="text-2xl">Post launch support: &#x1F9D7;</b></b>
               <br />
-              Ongoing maintenance and updates.
+              Ongoing maintenance and updates. Improve or add features, increase security, or optimize performance.
             </span>
           </div>
         </div>
@@ -467,110 +445,128 @@ export default function Home() {
             </h2>
             <p className='mt-2 text-lg leading-8 text-white'></p>
           </div>
-          <form
-            ref={formRef}
-            name='contact'
-            method='POST'
-            data-netlify='true'
-            className='mx-auto mt-16 max-w-xl sm:mt-20'
+          <div className='mx-auto mt-16 max-w-xl sm:mt-20'>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                form.handleSubmit();
+              }}
+            >
+              <form.Field name='name'>
+                {(field) => (
+                  <>
+                    <label
+                      htmlFor={field.name}
+                      className='block text-sm font-semibold leading-6 text-white'
+                    >
+                      name:
+                    </label>
+                    <input
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      type='name'
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
+                    />
+                    {field.state.meta.errors && (
+                      <div className='mt-1 text-red-500 text-sm'>
+                        {field.state.meta.errors.join(', ')}
+                      </div>
+                    )}
+                  </>
+                )}
+              </form.Field>
+              <form.Field name='email'>
+                {(field) => (
+                  <>
+                    <label
+                      htmlFor={field.name}
+                      className='block text-sm font-semibold leading-6 text-white'
+                    >
+                      email:
+                    </label>
+                    <input
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      type='email'
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
+                    />
+                    {field.state.meta.errors && (
+                      <div className='mt-1 text-red-500 text-sm'>
+                        {field.state.meta.errors.join(', ')}
+                      </div>
+                    )}
+                  </>
+                )}
+              </form.Field>
+              <form.Field name='phoneNumber'>
+                {(field) => (
+                  <>
+                    <label
+                      htmlFor={field.name}
+                      className='block text-sm font-semibold leading-6 text-white'
+                    >
+                      phone number:
+                    </label>
+                    <input
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      type='phone'
+                      placeholder='optional'
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
+                    />
+                    {field.state.meta.errors && (
+                      <div className='mt-1 text-red-500 text-sm'>
+                        {field.state.meta.errors.join(', ')}
+                      </div>
+                    )}
+                  </>
+                )}
+              </form.Field>
+              <form.Field name='message'>
+                {(field) => (
+                  <>
+                    <label
+                      htmlFor={field.name}
+                      className='block text-sm font-semibold leading-6 text-white'
+                    >
+                      message:
+                    </label>
+                    <textarea
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      placeholder='send me a message'
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      rows={8}
+                      className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
+                    />
+                    {field.state.meta.errors && (
+                      <div className='mt-1 text-red-500 text-sm'>
+                        {field.state.meta.errors.join(', ')}
+                      </div>
+                    )}
+                  </>
+                )}
+              </form.Field>
+            </form>
+          </div>
+          <button
+            type='submit'
+            disabled={form.state.isSubmitting}
+            className='block w-1/4 mx-auto mt-8 rounded-md bg-teal-200/85 px-3.5 py-2.5 text-center text-sm font-semibold transition-colors text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
           >
-            <div className='grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2'>
-              <div>
-                <label
-                  htmlFor='name'
-                  className='block text-sm font-semibold leading-6 text-white'
-                >
-                  name
-                </label>
-                <div className='mt-2.5'>
-                  <input
-                    id='name'
-                    name='name'
-                    type='text'
-                    autoComplete='given-name, surname'
-                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
-                  />
-                </div>
-              </div>
-              <div className='sm:col-span-2'>
-                <label
-                  htmlFor='company'
-                  className='block text-sm font-semibold leading-6 text-white'
-                >
-                  company
-                </label>
-                <div className='mt-2.5'>
-                  <input
-                    id='company'
-                    name='company'
-                    type='text'
-                    autoComplete='organization'
-                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
-                  />
-                </div>
-              </div>
-              <div className='sm:col-span-2'>
-                <label
-                  htmlFor='email'
-                  className='block text-sm font-semibold leading-6 text-white'
-                >
-                  email
-                </label>
-                <div className='mt-2.5'>
-                  <input
-                    id='email'
-                    name='email'
-                    type='email'
-                    autoComplete='email'
-                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
-                  />
-                </div>
-              </div>
-              <div className='sm:col-span-2'>
-                <label
-                  htmlFor='phone-number'
-                  className='block text-sm font-semibold leading-6 text-white'
-                >
-                  phone number
-                </label>
-                <div className='relative mt-2.5'>
-                  <input
-                    id='phone-number'
-                    name='phone-number'
-                    type='tel'
-                    autoComplete='tel'
-                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
-                  />
-                </div>
-              </div>
-              <div className='sm:col-span-2'>
-                <label
-                  htmlFor='message'
-                  className='block text-sm font-semibold leading-6 text-white'
-                >
-                  message
-                </label>
-                <div className='mt-2.5'>
-                  <textarea
-                    id='message'
-                    name='message'
-                    rows={4}
-                    className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
-                    defaultValue={''}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className='mt-10'>
-              <button
-                type='submit'
-                className='block w-full rounded-md bg-teal-200/85 px-3.5 py-2.5 text-center text-sm font-semibold transition-colors text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
-              >
-                let&apos;s talk
-              </button>
-            </div>
-          </form>
+            {form.state.isSubmitting ? 'Sending...' : "let's talk"}
+          </button>
+          {/* Repeat similar pattern for other fields */}
         </div>
+        
       </section>
     </div>
   );
