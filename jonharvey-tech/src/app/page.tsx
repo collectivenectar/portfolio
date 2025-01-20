@@ -107,8 +107,9 @@ export default function Home() {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams(formData as any).toString(),
-        });
-        console.log('Form successfully submitted');
+        })
+        .then(() => console.log("Form successfully submitted"))
+    .catch(error => alert(error));
       } catch (error) {
         console.error('Form submission failed:', error);
       }
@@ -450,12 +451,17 @@ export default function Home() {
           </div>
           <div className='mx-auto mt-16 max-w-xl sm:mt-20'>
             <form
+              name="contact"
+              method='POST'
+              data-netlify='true'
               onSubmit={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 form.handleSubmit();
               }}
             >
+              <input type="hidden" name="form-name" value="contact" />
+
               <form.Field name='name'>
                 {(field) => (
                   <>
