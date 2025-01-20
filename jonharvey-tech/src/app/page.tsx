@@ -4,6 +4,7 @@ import MorphingPolygon, {
   POLYGON_PRESETS,
 } from './components/css/MorphingPolygon';
 
+
 import { useForm } from '@tanstack/react-form';
 import { contactFormSchema, type ContactFormType } from './util/types';
 
@@ -102,7 +103,7 @@ export default function Home() {
           formData.append('phoneNumber', value.phoneNumber);
         }
         console.log(new URLSearchParams(formData as any).toString());
-        await fetch('/', {
+        await fetch('/__contactform.html', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams(formData as any).toString(),
@@ -451,8 +452,6 @@ export default function Home() {
           <div className='mx-auto mt-16 max-w-xl sm:mt-20'>
             <form
               name="contact"
-              method='POST'
-              data-netlify='true'
               onSubmit={(e) => {
                 e.preventDefault();
                 e.stopPropagation();

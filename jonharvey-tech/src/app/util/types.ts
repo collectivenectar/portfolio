@@ -7,7 +7,6 @@ export const contactFormSchema = z.object({
   email: z.string()
     .min(1, "Email is required")
     .email("Invalid email address"),
-  company: z.string().optional(),
   phoneNumber: z.string()
     .optional()
     .refine((val) => !val || /^(\+\d{1,3}[-.]?)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(val), {
