@@ -4,7 +4,6 @@ import MorphingPolygon, {
   POLYGON_PRESETS,
 } from './components/css/MorphingPolygon';
 
-import { useState, useEffect, useRef } from 'react';
 import { useForm } from '@tanstack/react-form';
 import { contactFormSchema, type ContactFormType } from './util/types';
 
