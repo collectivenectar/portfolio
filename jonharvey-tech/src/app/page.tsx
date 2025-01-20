@@ -93,17 +93,20 @@ export default function Home() {
       phoneNumber: '',
       message: '',
     },
-    onSubmit: async (values) => {
+    onSubmit: async ({value}) => {
       try {
-        const formObject: Record<string, string> = {};
-        Object.entries(values).forEach(([key, value]) => {
-          formObject[key] = value.toString();
-        });
-
+        const formData = new FormData()
+        formData.append('name', value.name);
+        formData.append('email', value.email);
+        formData.append('message', value.message);
+        if(value.phoneNumber){
+          formData.append('phoneNumber', value.phoneNumber);
+        }
+        console.log(new URLSearchParams(formData as any).toString());
         await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formObject).toString(),
+          body: new URLSearchParams(formData as any).toString(),
         });
         console.log('Form successfully submitted');
       } catch (error) {
