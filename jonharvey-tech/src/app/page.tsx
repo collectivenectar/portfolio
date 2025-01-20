@@ -100,7 +100,7 @@ export default function Home() {
           formObject[key] = value.toString();
         });
 
-        await fetch('/', {
+        await fetch('/__contactform.html', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams(formObject).toString(),
@@ -555,15 +555,16 @@ export default function Home() {
                   </>
                 )}
               </form.Field>
-            </form>
-          </div>
-          <button
+              <button
             type='submit'
             disabled={form.state.isSubmitting}
             className='block w-1/4 mx-auto mt-8 rounded-md bg-teal-200/85 px-3.5 py-2.5 text-center text-sm font-semibold transition-colors text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
           >
             {form.state.isSubmitting ? 'Sending...' : "let's talk"}
           </button>
+            </form>
+          </div>
+         
           {/* Repeat similar pattern for other fields */}
         </div>
         
