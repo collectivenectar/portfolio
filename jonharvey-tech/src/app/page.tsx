@@ -144,7 +144,8 @@ export default function Home() {
       if(!validators.message.test(message as string)){
         return 'invalid message format'
       }
-      if(phoneNumber !== null){
+      if(phoneNumber !== null && phoneNumber !== ''){
+        console.log(phoneNumber)
         if(!validators.phone.test(phoneNumber as string)){
           return 'invalid phone number format'
         }
@@ -562,7 +563,7 @@ export default function Home() {
                     )}
               <button
             type='submit'
-            className='block w-1/4 mx-auto mt-8 rounded-md bg-teal-200/85 px-3.5 py-2.5 text-center text-sm font-semibold transition-colors text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
+            className='block w-1/3 mx-auto mt-8 rounded-md bg-teal-200/85 px-3.5 py-2.5 text-center text-sm font-semibold transition-colors text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
           >contact me
           </button>
             </form>
