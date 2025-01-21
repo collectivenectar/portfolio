@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import styles from './page.module.css';
 import MorphingPolygon, {
   POLYGON_PRESETS,
@@ -86,38 +87,32 @@ const toolset = {
 };
 
 export default function Home() {
-  const form = useForm<ContactFormType>({
-    defaultValues: {
-      name: '',
-      email: '',
-      phoneNumber: '',
-      message: '',
-    },
-    onSubmit: async ({value}) => {
-      try {
-        const formData = new FormData()
-        formData.append('name', value.name);
-        formData.append('email', value.email);
-        formData.append('message', value.message);
-        if(value.phoneNumber){
-          formData.append('phoneNumber', value.phoneNumber);
-        }
-        console.log(new URLSearchParams(formData as any).toString());
-        await fetch('/__contactform.html', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData as any).toString(),
-        })
-        .then(() => console.log("Form successfully submitted"))
-    .catch(error => alert(error));
-      } catch (error) {
-        console.error('Form submission failed:', error);
-      }
-    },
-    validators: {
-      onChange: contactFormSchema,
-    },
+  
+  const [contactForm, setContactForm] = useState<ContactFormType>({
+    name: '',
+    email: '',
+    phoneNumber: '',
+    message: '',
   });
+
+  const handleContactFormChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    // depending on the input target name, update the form state field
+    setContactForm({
+      ...contactForm,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.target as HTMLFormElement);
+    await fetch("/__contactform.html", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData as any).toString(),
+    })
+    console.log( new URLSearchParams(formData as any).toString())
+  }
 
   return (
     <div className='flex-col h-full justify-start text-white'>
@@ -452,122 +447,76 @@ export default function Home() {
           <div className='mx-auto mt-16 max-w-xl sm:mt-20'>
             <form
               name="contact"
-              onSubmit={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                form.handleSubmit();
-              }}
+              onSubmit={handleSubmit}
             >
               <input type="hidden" name="form-name" value="contact" />
-
-              <form.Field name='name'>
-                {(field) => (
-                  <>
                     <label
-                      htmlFor={field.name}
+                      htmlFor="name"
                       className='block text-sm font-semibold leading-6 text-white'
                     >
                       name:
                     </label>
                     <input
-                      id={field.name}
-                      name={field.name}
-                      value={field.state.value}
+                      id="name"
+                      name="name"
+                      value={contactForm.name}
                       type='name'
-                      onChange={(e) => field.handleChange(e.target.value)}
+                      onChange={(e) => handleContactFormChange(e)}
                       className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
                     />
-                    {field.state.meta.errors && (
-                      <div className='mt-1 text-red-500 text-sm'>
-                        {field.state.meta.errors.join(', ')}
-                      </div>
-                    )}
-                  </>
-                )}
-              </form.Field>
-              <form.Field name='email'>
-                {(field) => (
-                  <>
+              
                     <label
-                      htmlFor={field.name}
+                      htmlFor="email"
                       className='block text-sm font-semibold leading-6 text-white'
                     >
                       email:
                     </label>
                     <input
-                      id={field.name}
-                      name={field.name}
-                      value={field.state.value}
+                      id="email"
+                      name="email"
+                      value={contactForm.email}
                       type='email'
-                      onChange={(e) => field.handleChange(e.target.value)}
+                      onChange={(e) => handleContactFormChange(e)}
                       className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
                     />
-                    {field.state.meta.errors && (
-                      <div className='mt-1 text-red-500 text-sm'>
-                        {field.state.meta.errors.join(', ')}
-                      </div>
-                    )}
-                  </>
-                )}
-              </form.Field>
-              <form.Field name='phoneNumber'>
-                {(field) => (
-                  <>
+                    
+              
                     <label
-                      htmlFor={field.name}
+                      htmlFor="phoneNumber"
                       className='block text-sm font-semibold leading-6 text-white'
                     >
                       phone number:
                     </label>
                     <input
-                      id={field.name}
-                      name={field.name}
-                      value={field.state.value}
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      value={contactForm.phoneNumber}
                       type='phone'
                       placeholder='optional'
-                      onChange={(e) => field.handleChange(e.target.value)}
+                      onChange={(e) => handleContactFormChange(e)}
                       className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
                     />
-                    {field.state.meta.errors && (
-                      <div className='mt-1 text-red-500 text-sm'>
-                        {field.state.meta.errors.join(', ')}
-                      </div>
-                    )}
-                  </>
-                )}
-              </form.Field>
-              <form.Field name='message'>
-                {(field) => (
-                  <>
+                    
+             
                     <label
-                      htmlFor={field.name}
+                      htmlFor="message"
                       className='block text-sm font-semibold leading-6 text-white'
                     >
                       message:
                     </label>
                     <textarea
-                      id={field.name}
-                      name={field.name}
-                      value={field.state.value}
+                      id="message"
+                      name="message"
+                      value={contactForm.message}
                       placeholder='send me a message'
-                      onChange={(e) => field.handleChange(e.target.value)}
+                      onChange={(e) => handleContactFormChange(e)}
                       rows={8}
                       className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
                     />
-                    {field.state.meta.errors && (
-                      <div className='mt-1 text-red-500 text-sm'>
-                        {field.state.meta.errors.join(', ')}
-                      </div>
-                    )}
-                  </>
-                )}
-              </form.Field>
               <button
             type='submit'
-            disabled={form.state.isSubmitting}
             className='block w-1/4 mx-auto mt-8 rounded-md bg-teal-200/85 px-3.5 py-2.5 text-center text-sm font-semibold transition-colors text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
-          >
-            {form.state.isSubmitting ? 'Sending...' : "let's talk"}
+          >contact me
           </button>
             </form>
           </div>
