@@ -95,6 +95,8 @@ export default function Home() {
     message: '',
   });
 
+  const [formErrors, setFormErrors] = useState<string[]>([]);
+
   const handleContactFormChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     // depending on the input target name, update the form state field
     setContactForm({
@@ -106,12 +108,50 @@ export default function Home() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement);
-    await fetch("/__contactform.html", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData as any).toString(),
-    })
-    console.log( new URLSearchParams(formData as any).toString())
+    const validationResults = validateForm(formData);
+    if(validationResults === true || validationResults === false){
+      await fetch("/__contactform.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
+      })
+    }else{
+      setFormErrors([validationResults])
+    }
+  }
+
+  const validators = {
+    name: /^[a-zA-ZÀ-ÿ'-\s]{1,100}$/,
+    email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+    phone: /^\+?[0-9\s()-]{7,15}$/,
+    message: /^[\s\S]{10,1000}$/
+  };
+
+  const validateForm = (formData: FormData) : boolean | string => {
+    // verify each field, return true if all are valid
+    const name = formData.get("name")
+    const email = formData.get("email")
+    const message = formData.get("message")
+    const phoneNumber = formData.get("phoneNumber")
+
+    if(name !== null && email !== null && message !== null){
+      if(!validators.name.test(name as string)){
+        return 'invalid name format'
+      }
+      if(!validators.email.test(email as string)){
+        return 'invalid email format'
+      }
+      if(!validators.message.test(message as string)){
+        return 'invalid message format'
+      }
+      if(phoneNumber !== null){
+        if(!validators.phone.test(phoneNumber as string)){
+          return 'invalid phone number format'
+        }
+      }
+      return true
+    }
+    return 'form incomplete'
   }
 
   return (
@@ -513,6 +553,13 @@ export default function Home() {
                       rows={8}
                       className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
                     />
+                    {formErrors.length > 0 && (
+                      <ul className='mt-2 text-sm text-red-600'>
+                        {formErrors.map((error) => (
+                          <li key={error}>{error}</li>
+                        ))}
+                      </ul>
+                    )}
               <button
             type='submit'
             className='block w-1/4 mx-auto mt-8 rounded-md bg-teal-200/85 px-3.5 py-2.5 text-center text-sm font-semibold transition-colors text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
