@@ -7,6 +7,11 @@ const Footer = () => {
         <div>
           <h4 className="border-b border-blue-500 w-28 mx-auto my-4">Links</h4>
           <ul className="flex flex-col lg:flex-row lg:flex-wrap lg:w-1/4 lg:justify-around lg:mx-auto lg:w-full h-fit w-full items-center">
+          <li className="border border-transparent w-32 rounded-full py-2 my-2 h-fit transition duration-500 hover:bg-white hover:text-black">
+              <a href="/blog" className="block">
+                Blog
+              </a>
+            </li>
             <li className="border border-transparent w-32 rounded-full py-2 my-2 h-fit transition duration-500 hover:bg-white hover:text-black">
               <a href="https://linkedin.com/in/jonharveydev" className="block">
                 LinkedIn
