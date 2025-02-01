@@ -1,4 +1,5 @@
 'use server'
+
 import { PinataSDK } from "pinata-web3";
 
 export interface BlogPost {
@@ -73,11 +74,8 @@ export const getBlogIndex = async () => {
   }
 
   if (index.data !== null && index.data !== undefined) {
-    if (index.contentType === "application/json") {
-      return typeof index.data === "string" ? JSON.parse(index.data) : index.data;
-    } else {
-      throw new Error("Index is not a JSON file");
-    }
+    return index.data as unknown as BlogIndex;
+    
   } else {
     throw new Error("Index is empty or invalid");
   }
