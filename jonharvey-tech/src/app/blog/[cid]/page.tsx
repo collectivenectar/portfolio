@@ -1,5 +1,5 @@
 'use server';
-// import { getContentByCID } from '../../services/pinata';
+import { getContentByCID } from '../../services/pinata';
 import { compile, run } from '@mdx-js/mdx';
 import * as runtime from 'react/jsx-runtime';
 import { YouTubeVid } from '../../components/blog/mdx/Embeds';
@@ -29,30 +29,30 @@ export default async function Page({
     }
 
     // Fetch the content using the CID
-    // content = await getContentByCID(cid);
-    // if (content && content.data) {
-    //   const mdxSource = content.data.toString();
-    //   if (mdxSource) {
-    //     // compile to function body
-    //     const code = String(
-    //       await compile(mdxSource, {
-    //         outputFormat: 'function-body',
-    //       })
-    //     );
+    content = await getContentByCID(cid);
+    if (content && content.data) {
+      const mdxSource = content.data.toString();
+      if (mdxSource) {
+        // compile to function body
+        const code = String(
+          await compile(mdxSource, {
+            outputFormat: 'function-body',
+          })
+        );
 
-    //     // run the code with runtime and get default export
-    //     const { default: MDXComponent } = await run(code, {
-    //       ...runtime,
-    //       baseUrl: import.meta.url,
-    //     });
+        // run the code with runtime and get default export
+        const { default: MDXComponent } = await run(code, {
+          ...runtime,
+          baseUrl: import.meta.url,
+        });
 
-    //     MDXContent = MDXComponent;
-    //   } else {
-    //     throw new Error('No MDX source found in content');
-    //   }
-    // } else {
-    //   throw new Error('Failed to fetch content');
-    // }
+        MDXContent = MDXComponent;
+      } else {
+        throw new Error('No MDX source found in content');
+      }
+    } else {
+      throw new Error('Failed to fetch content');
+    }
   } catch (err) {
     console.error('Error fetching or rendering MDX:', err);
     return <p>Error fetching post</p>; // Return an error message if fetching fails
@@ -66,7 +66,7 @@ export default async function Page({
   return (
     <div className='prose prose-invert text-white px-4 md:w-5/6 md:mx-auto'>
       <BlogHeader />
-      {/* <MDXContent components={{ MyReactComponent, YouTubeEmbed: YouTubeVid }} /> */}
+      <MDXContent components={{ MyReactComponent, YouTubeEmbed: YouTubeVid }} />
       <BlogFooter
         date={''}
         author={{
