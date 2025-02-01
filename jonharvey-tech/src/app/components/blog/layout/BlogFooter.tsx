@@ -24,7 +24,7 @@ const BlogFooter = (props: BlogFooterProps) => {
         <footer className="mt-12 border-t border-gray-200 pt-6 mb-12 border-b-2 border-gray-800 pb-12">
           {/* Post Metadata */}
           <div className="text-sm text-gray-600">
-            <p>Published on: {props.date}</p>
+            {/* <p>Published on: {props.date}</p> */}
           </div>
           {/* Author Info */}
           {props.author && (
@@ -39,7 +39,7 @@ const BlogFooter = (props: BlogFooterProps) => {
     
           {/* Suggested Reading */}
           <div className="mt-8 flex flex-col sm:flex-row sm:justify-between gap-4">
-            {props.prevPost && (
+            {/* {props.prevPost && (
               <a href={`/blog/${props.prevPost.hash}`} className="text-blue-300 hover:underline">
                 ← {props.prevPost.title}
               </a>
@@ -48,7 +48,7 @@ const BlogFooter = (props: BlogFooterProps) => {
               <a href={`/blog/${props.nextPost.hash}`} className="text-blue-300 hover:underline">
                 {props.nextPost.title} →
               </a>
-            )}
+            )} */}
           </div>
         </footer>
       );

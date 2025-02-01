@@ -15,12 +15,7 @@ function MyReactComponent() {
   );
 }
 
-export default async function Page({
-  // TODO: expand params to include data and possibly metadata?
-  params,
-}: {
-  params: { cid: string };  // Ensuring params is typed correctly
-}) {
+export default async function Page({ params }: { params: Promise<{ cid: string }> }) {
   let MDXContent = null;
   let content = null;
   let cid = (await params).cid
@@ -66,22 +61,22 @@ export default async function Page({
   }
 
   return (
-    <div className="prose prose-invert  text-white px-4">
+    <div className="prose prose-invert text-white px-4 md:w-5/6 md:mx-auto">
       <BlogHeader/>
       <MDXContent components={{ MyReactComponent, YouTubeEmbed: YouTubeVid }} />
       <BlogFooter
-        date={"12/12/2023"}
+        date={""}
         author={{
           name: "Jon Harvey",
           image: "/images/jonharvey.PNG",
-          bio: "Jon Harvey is a software engineer at Wander. He is a full stack developer with a passion for building web applications and blockchain technology. He is also a musician and a writer."
+          bio: "Jon Harvey is a full stack developer based out of southern California, but works as a digital nomad in the western hemisphere. He is also a musician and a writer."
         }}
         prevPost={{
-            title: "working at Wander",
+            title: "",
             hash: ""
         }}
         nextPost={{
-            title: "getting a promotion within six months",
+            title: "",
             hash: ""
         }}
       />

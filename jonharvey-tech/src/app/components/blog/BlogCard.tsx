@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { PinListItem } from 'pinata-web3';
+import { BlogPost } from '@/app/services/pinata';
 
 interface BlogCardProps {
-  blog: PinListItem;
+  blog: BlogPost;
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
@@ -20,12 +20,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
     <div className=''>
       <li
         key={blog.id}
-        className='border border-white rounded-3xl flex flex-col justify-center min-h-20 w-full my-4'
+        className='border border-white rounded-3xl flex flex-col min-h-20 w-full my-4'
       >
-        <Link className="className='relative block w-full h-64 rounded-2xl overflow-hidden shadow-lg transition-transform transform hover:scale-105" href={`/blog/${blog.ipfs_pin_hash}`}>
+        <Link className="className='relative block w-full h-64 rounded-2xl overflow-hidden shadow-lg transition-transform transform hover:scale-105" href={`/blog/${blog.mdx.split("ipfs/")[1]}`}>
           
             <img
-              src={'./images/jonharvey.PNG'}
+              src={blog.image}
               alt={''}
               className='absolute inset-0 w-full h-full object-cover'
             />
@@ -35,8 +35,8 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
 
             {/* Content Layer */}
             <div className='absolute bottom-0 left-0 w-full p-4 text-white'>
-              <h3 className='text-3xl break-all font-semibold'>{blog.metadata.name?.split(".")[0]}</h3>
-              <p className='text-sm opacity-80'>{new Date(blog.date_pinned).toLocaleDateString()}</p>
+              <h3 className='text-3xl text-left break-all font-semibold'>{blog.title}</h3>
+              <p className='text-sm text-left opacity-80'>{new Date(blog.date).toLocaleDateString()}</p>
             </div>
           
         </Link>

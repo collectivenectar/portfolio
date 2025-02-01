@@ -1,6 +1,21 @@
 'use server'
 import { PinataSDK } from "pinata-web3";
 
+export interface BlogPost {
+  id: number;
+  title: string;
+  mdx: string; // URL to the MDX file
+  date: string; // ISO date format (YYYY-MM-DD)
+  image: string; // URL to the post's image
+  summary: string;
+  tags: string[];
+}
+
+export interface BlogIndex {
+  featured: number[]; // Array of post IDs that are featured
+  posts: BlogPost[];
+}
+
 const pinata = new PinataSDK({
     pinataJwt: process.env.PINATA_JWT!,
     pinataGateway: process.env.PINATA_GATEWAY,
@@ -47,6 +62,26 @@ export const getContentByCID = async (cid: string) => {
         throw new Error('content not found');
     }
 }
+
+export const getBlogIndex = async () => {
+  const index = await pinata.gateways.get(
+    "bafkreifuvo5wze7sf7feg6xoz5dgegfhbxwuouoblonrhekvvyxjvmdbqq"
+  );
+
+  if (!index) {
+    throw new Error("Index not found");
+  }
+
+  if (index.data !== null && index.data !== undefined) {
+    if (index.contentType === "application/json") {
+      return typeof index.data === "string" ? JSON.parse(index.data) : index.data;
+    } else {
+      throw new Error("Index is not a JSON file");
+    }
+  } else {
+    throw new Error("Index is empty or invalid");
+  }
+};
 
 // create functions to list all content in the two groups - blog-media and blog-posts
 

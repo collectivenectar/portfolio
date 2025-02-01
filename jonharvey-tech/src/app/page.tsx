@@ -5,7 +5,6 @@ import MorphingPolygon, {
   POLYGON_PRESETS,
 } from './components/css/MorphingPolygon';
 
-
 import { useForm } from '@tanstack/react-form';
 import { contactFormSchema, type ContactFormType } from './util/types';
 
@@ -87,7 +86,6 @@ const toolset = {
 };
 
 export default function Home() {
-  
   const [contactForm, setContactForm] = useState<ContactFormType>({
     name: '',
     email: '',
@@ -97,7 +95,9 @@ export default function Home() {
 
   const [formErrors, setFormErrors] = useState<string[]>([]);
 
-  const handleContactFormChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleContactFormChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     // depending on the input target name, update the form state field
     setContactForm({
       ...contactForm,
@@ -106,54 +106,54 @@ export default function Home() {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const validationResults = validateForm(formData);
-    if(validationResults === true || validationResults === false){
-      await fetch("/__contactform.html", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    if (validationResults === true || validationResults === false) {
+      await fetch('/__contactform.html', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(formData as any).toString(),
-      })
-    }else{
-      setFormErrors([validationResults])
+      });
+    } else {
+      setFormErrors([validationResults]);
     }
-  }
+  };
 
   const validators = {
     name: /^[a-zA-ZÀ-ÿ'-\s]{1,100}$/,
     email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
     phone: /^\+?[0-9\s()-]{7,15}$/,
-    message: /^[\s\S]{10,1000}$/
+    message: /^[\s\S]{10,1000}$/,
   };
 
-  const validateForm = (formData: FormData) : boolean | string => {
+  const validateForm = (formData: FormData): boolean | string => {
     // verify each field, return true if all are valid
-    const name = formData.get("name")
-    const email = formData.get("email")
-    const message = formData.get("message")
-    const phoneNumber = formData.get("phoneNumber")
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const message = formData.get('message');
+    const phoneNumber = formData.get('phoneNumber');
 
-    if(name !== null && email !== null && message !== null){
-      if(!validators.name.test(name as string)){
-        return 'invalid name format'
+    if (name !== null && email !== null && message !== null) {
+      if (!validators.name.test(name as string)) {
+        return 'invalid name format';
       }
-      if(!validators.email.test(email as string)){
-        return 'invalid email format'
+      if (!validators.email.test(email as string)) {
+        return 'invalid email format';
       }
-      if(!validators.message.test(message as string)){
-        return 'invalid message format'
+      if (!validators.message.test(message as string)) {
+        return 'invalid message format';
       }
-      if(phoneNumber !== null && phoneNumber !== ''){
-        console.log(phoneNumber)
-        if(!validators.phone.test(phoneNumber as string)){
-          return 'invalid phone number format'
+      if (phoneNumber !== null && phoneNumber !== '') {
+        console.log(phoneNumber);
+        if (!validators.phone.test(phoneNumber as string)) {
+          return 'invalid phone number format';
         }
       }
-      return true
+      return true;
     }
-    return 'form incomplete'
-  }
+    return 'form incomplete';
+  };
 
   return (
     <div className='flex-col h-full justify-start text-white'>
@@ -436,47 +436,75 @@ export default function Home() {
           <div className='text-lg flex flex-col items-center lg:w-3/4 lg:gap-10 lg:mt-10'>
             {/* STEP 1: Consultation & Planning */}
 
-            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/30 rounded-xl lg:p-5'>
-            <b className="text-2xl">Step 1: &#x1F441;</b>  <br /> Plan - Book a free 20 minute consultation
-              with me to share your vision and requirements, and outline the
-              projects scope and timelines. If we decide to move forward, we
-              may plan more time to discuss required details, billed hourly or at a fixed price. 	
+            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/30 rounded-xl lg:p-5 hover:border-teal-300'>
+              <b className='text-2xl'>Step 1: &#x1F441;</b> <br /> Plan - Book a
+              free 20 minute consultation with me to share your vision and
+              requirements, and outline the projects scope and timelines. If we
+              decide to move forward, we may plan more time to discuss required
+              details, billed hourly or at a fixed price.
             </span>
-            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/40 rounded-xl lg:p-5'>
-              <b className="text-2xl">Step 2:</b> &#x1F527;<br /> Get building! - I may create wireframes, data
-              models, and mockups for your approval. Build and integrate
-              front-end and back-end components.
+            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/40 rounded-xl lg:p-5 hover:border-teal-300'>
+              <b className='text-2xl'>Step 2:</b> &#x1F527;
+              <br /> Get building! - I may create wireframes, data models, and
+              mockups for your approval. Build and integrate front-end and
+              back-end components.
             </span>
-            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/60 rounded-xl lg:p-5'>
-            <b className="text-2xl">Step 3:</b> &#x1F575;<br />
+            <span className='mt-4 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/60 rounded-xl lg:p-5 hover:border-teal-300'>
+              <b className='text-2xl'>Step 3:</b> &#x1F575;
+              <br />
               Test - Ensure everything works seamlessly. Deploy your application
               or site to a live audience. Get useful feedback, iterate, and
               improve!
             </span>
 
-            <span className='w-11/12 mt-6 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/80 rounded-xl lg:p-5'>
-              <b className=''><b className="text-2xl">Post launch support: &#x1F9D7;</b></b>
+            <span className='w-11/12 mt-6 font-Outfit py-2 mx-4 px-4 lg:min-h-32 lg:w-1/2 border border-teal-300/80 rounded-xl lg:p-5 hover:border-teal-300'>
+              <b className=''>
+                <b className='text-2xl'>Post launch support: &#x1F9D7;</b>
+              </b>
               <br />
-              Ongoing maintenance and updates. Improve or add features, increase security, or optimize performance.
+              Ongoing maintenance and updates. Improve or add features, increase
+              security, or optimize performance.
             </span>
           </div>
         </div>
-      </section>
-      {/* BLOG  */}
-      {/* <section className='my-12 bg-white/15 lg:h-fit lg:mt-48 w-full flex flex-row lg:w-full items-center justify-center'>
-        <div className='lg:w-12/12 lg:h-48 flex flex-col justify-center'>
-          <p className='pl-32 lg:text-4xl lg:w-fit'>
-            Want Web Design, Content Strategy, and Tech Industry insights?
-          </p>
-        </div>
-        <button className='rounded-xl bg-black hover:bg-white transition-bg hover:text-black duration-500 m-12 min-w-28 py-1 px-5 lg:mr-24 lg:py-2 lg:px-5 lg:rounded-xl border-2 border-white'>
-          my blog
-        </button>
-      </section> */}
+          </section>
+          {/* BLOG  */}
+          <section className='mt-12 bg-white/15 lg:h-fit lg:mt-48 w-full flex flex-row lg:w-full items-center justify-center'>
+            <div className='relative w-full h-[500px] flex items-center'>
+              {/* Background Image */}
+              <div 
+                className='absolute inset-0 w-full h-full'
+                style={{
+                  backgroundImage: 'url("/images/blog-background.jpg")',
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat'
+                }}
+              />
+              {/* Gradient Overlay */}
+              <div className='absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent' />
+          
+              {/* Content */}
+              <div className='relative z-10 max-w-2xl mx-12 lg:ml-24'>
+                <h2 className='text-4xl lg:text-5xl font-bold mb-6'>
+                  Insights & Innovation
+                </h2>
+                <p className='text-lg lg:text-xl mb-8 leading-relaxed'>
+                  Dive into technical deep-dives, industry insights, and creative solutions. Learn how I approach complex challenges and stay ahead of emerging technologies in web development and digital innovation.
+                </p>
+                <a 
+                  href='/blog' 
+                  className='inline-block px-8 py-3 bg-teal-200/85 text-black rounded-md hover:bg-black hover:text-white transition-colors duration-300 font-semibold'
+                >
+                  Explore the Blog
+                </a>
+              </div>
+            </div>
+          </section>
       {/* CONTACT ME  */}
       <section
         id='contact'
-        className='mt-12 h-fit'
+        className='h-fit'
       >
         <div className='bg-teal-200/15 px-6 py-24 sm:py-32 lg:px-8'>
           <div className='mx-auto max-w-2xl text-center'>
@@ -487,91 +515,102 @@ export default function Home() {
           </div>
           <div className='mx-auto mt-16 max-w-xl sm:mt-20'>
             <form
-              name="contact"
+              name='contact'
               onSubmit={handleSubmit}
+              className="flex flex-col gap-4"
             >
-              <input type="hidden" name="form-name" value="contact" />
-                    <label
-                      htmlFor="name"
-                      className='block text-sm font-semibold leading-6 text-white'
-                    >
-                      name:
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      value={contactForm.name}
-                      type='name'
-                      onChange={(e) => handleContactFormChange(e)}
-                      className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
-                    />
+              <input
+                type='hidden'
+                name='form-name'
+                value='contact'
+              />
+              <div>
+              <label
+                htmlFor='name'
+                className='block text-sm font-semibold leading-6 text-white'
+              >
+                name:
+              </label>
+              <input
+                id='name'
+                name='name'
+                value={contactForm.name}
+                type='name'
+                onChange={(e) => handleContactFormChange(e)}
+                className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
+              />
+              </div>
               
-                    <label
-                      htmlFor="email"
-                      className='block text-sm font-semibold leading-6 text-white'
-                    >
-                      email:
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      value={contactForm.email}
-                      type='email'
-                      onChange={(e) => handleContactFormChange(e)}
-                      className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
-                    />
-                    
+        <div>
+        <label
+                htmlFor='email'
+                className='block text-sm font-semibold leading-6 text-white'
+              >
+                email:
+              </label>
+              <input
+                id='email'
+                name='email'
+                value={contactForm.email}
+                type='email'
+                onChange={(e) => handleContactFormChange(e)}
+                className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
+              />
+        </div>
+        <div>
+        <label
+                htmlFor='phoneNumber'
+                className='block text-sm font-semibold leading-6 text-white'
+              >
+                phone number:
+              </label>
+              <input
+                id='phoneNumber'
+                name='phoneNumber'
+                value={contactForm.phoneNumber}
+                type='phone'
+                placeholder='optional'
+                onChange={(e) => handleContactFormChange(e)}
+                className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
+              />
+        </div>
+              <div>
+              <label
+                htmlFor='message'
+                className='block text-sm font-semibold leading-6 text-white'
+              >
+                message:
+              </label>
+              <textarea
+                id='message'
+                name='message'
+                value={contactForm.message}
+                placeholder='send me a message'
+                onChange={(e) => handleContactFormChange(e)}
+                rows={8}
+                className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
+              />
+              </div>
+
               
-                    <label
-                      htmlFor="phoneNumber"
-                      className='block text-sm font-semibold leading-6 text-white'
-                    >
-                      phone number:
-                    </label>
-                    <input
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      value={contactForm.phoneNumber}
-                      type='phone'
-                      placeholder='optional'
-                      onChange={(e) => handleContactFormChange(e)}
-                      className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
-                    />
-                    
-             
-                    <label
-                      htmlFor="message"
-                      className='block text-sm font-semibold leading-6 text-white'
-                    >
-                      message:
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={contactForm.message}
-                      placeholder='send me a message'
-                      onChange={(e) => handleContactFormChange(e)}
-                      rows={8}
-                      className='bg-black block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-200 sm:text-sm sm:leading-6'
-                    />
-                    {formErrors.length > 0 && (
-                      <ul className='mt-2 text-sm text-red-600'>
-                        {formErrors.map((error) => (
-                          <li key={error}>{error}</li>
-                        ))}
-                      </ul>
-                    )}
+              {formErrors.length > 0 && (
+                <ul className='mt-2 text-sm text-red-600'>
+                  {formErrors.map((error) => (
+                    <li key={error}>{error}</li>
+                  ))}
+                </ul>
+              )}
               <button
-            type='submit'
-            className='block w-1/3 mx-auto mt-8 rounded-md bg-teal-200/85 px-3.5 py-2.5 text-center text-sm font-semibold transition-colors text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
-          >contact me
-          </button>
+                type='submit'
+                className='block w-1/3 mx-auto mt-8 rounded-md bg-teal-200/85 px-3.5 py-2.5 text-center text-sm font-semibold transition-colors text-black shadow-sm hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 active:bg-white focus-visible:outline-offset-2 focus-visible:outline-white'
+              >
+                contact me
+              </button>
             </form>
           </div>
-         
+
           {/* Repeat similar pattern for other fields */}
         </div>
-        
       </section>
     </div>
   );
