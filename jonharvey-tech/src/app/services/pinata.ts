@@ -65,8 +65,10 @@ export const getContentByCID = async (cid: string) => {
 }
 
 export const getBlogIndex = async () => {
+  
+  const postList = await pinata.listFiles().group("dbfa9da7-6563-4b86-a6dd-d2f06aa205e4")
   const index = await pinata.gateways.get(
-    "bafkreifuvo5wze7sf7feg6xoz5dgegfhbxwuouoblonrhekvvyxjvmdbqq"
+    postList[0].ipfs_pin_hash
   );
 
   if (!index) {
