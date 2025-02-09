@@ -2,10 +2,12 @@
 import { getContentByCID } from '../../services/pinata';
 import { compile, run } from '@mdx-js/mdx';
 import * as runtime from 'react/jsx-runtime';
+import dynamic from 'next/dynamic';
 import { YouTubeVid } from '../../components/blog/mdx/Embeds';
 
 import BlogHeader from '../../components/blog/layout/BlogHeader';
 import BlogFooter from '../../components/blog/layout/BlogFooter';
+
 
 function MyReactComponent() {
   return (
@@ -14,6 +16,12 @@ function MyReactComponent() {
     </div>
   );
 }
+
+type BlogAnalyticsProps = {
+  cid: string;
+}
+
+const BlogAnalytics = dynamic<BlogAnalyticsProps>(() => import('../../components/blog/BlogAnalytics'))
 
 export default async function Page({
   params,
@@ -65,6 +73,7 @@ export default async function Page({
 
   return (
     <div className='prose prose-invert text-white px-4 md:w-5/6 md:mx-auto'>
+      <BlogAnalytics cid={cid as string}/>
       <BlogHeader />
       <MDXContent components={{ MyReactComponent, YouTubeEmbed: YouTubeVid }} />
       <BlogFooter
