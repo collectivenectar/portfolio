@@ -35,7 +35,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
 
             {/* Content Layer */}
             <div className='absolute bottom-0 left-0 w-full p-4 text-white'>
-              <h3 className='text-3xl text-left break-all font-semibold'>{blog.title}</h3>
+              <h3 className='text-3xl text-left break-words font-semibold'>{blog.title}</h3>
               <p className='text-sm text-left opacity-80'>{new Date(blog.date).toLocaleDateString()}</p>
             </div>
           
