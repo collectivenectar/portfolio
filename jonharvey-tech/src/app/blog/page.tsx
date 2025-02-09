@@ -60,7 +60,7 @@ export default function BlogLandingPage() {
       {/* <HeroCarousel posts={carouselPosts} /> */}
 
       {/* List of Recent Posts */}
-      <div className='w-full h-screen text-white font-Outfit text-center text-3xl mt-12'>
+      <div className='w-full h-fit text-white font-Outfit text-center text-3xl mt-12'>
         Latest Posts
         <ul className='px-4 md:w-2/3 mx-auto pt-20'>
           {posts.map((post) => (
